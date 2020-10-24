@@ -1,0 +1,86 @@
+.raised {
+  box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
+  padding: 0.8em 1.365em 1em;
+  border: solid 3px #2f85cc;
+  font-size: 0.85rem;
+  font-family: "Lato", sans-serif;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.custom-label {
+  font-weight: bold;
+  font-size: 0.88rem;
+  color: #585858;
+}
+
+.custom-control {
+  font-weight: bold;
+  font-size: 0.89rem;
+  line-height: 0.9;
+  color: #35495e;
+}
+
+.custom-control::-webkit-input-placeholder {
+  color: #adadad;
+}
+
+.custom-control:-ms-input-placeholder {
+  color: #adadad;
+}
+
+.custom-control::-ms-input-placeholder {
+  color: #adadad;
+}
+
+.custom-control::placeholder {
+  color: #adadad;
+}
+
+.custom-control option {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  color: #585858;
+}
+
+select.custom-control:not([size]):not([multiple]) {
+  height: calc(1.6rem + 3px);
+  border-radius: 4px;
+  padding: 0 0.4rem;
+}
+
+.custom-control[type=text],
+.custom-control[type=email],
+.custom-control[type=number],
+.custom-control[type=date],
+.custom-control[type=time] {
+  height: calc(1.6rem + 2px);
+  border-radius: 4px;
+}
+
+.invalid {
+  color: #c43d4b;
+  font-weight: bold;
+}
+
+.btn-link {
+  color: #2a93d5;
+  font-weight: 600;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type=time]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type=week]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+

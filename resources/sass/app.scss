@@ -1,0 +1,78 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+// Bootstrap and plugins
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap-float-label/dist/bootstrap-float-label.min.css';
+@import '~vue-form-wizard/dist/vue-form-wizard.min.css';
+@import '~vue2-dropzone/dist/vue2Dropzone.min.css';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
+@import './multiselect';
+
+//Form wizard
+.vue-form-wizard .wizard-title {
+  color: #52504d;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+//Vue DropZone
+#upload .dz-preview {
+  margin: 0;
+}
+
+#upload .dz-preview .dz-image {
+  width: 80px;
+  height: 80px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#upload .dz-preview .dz-image > img {
+  width: 100%;
+}
+
+#upload .dz-preview .dz-details {
+  color: white;
+  transition: opacity 0.2s linear;
+  text-align: center;
+}
+#upload .dz-success-mark,
+.dz-error-mark,
+.dz-remove {
+  display: none;
+}
+
+//Vue Spinners
+.container-spinner {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-color: rgba(0, 0, 0, 0.116);
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100vh; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer;
+}
+
+.text-spinner {
+  color: #fff;
+  font-family: 'Lato';
+}

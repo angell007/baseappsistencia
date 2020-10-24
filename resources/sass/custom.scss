@@ -1,0 +1,80 @@
+//Custom - Cristhian - These are custom styles for some template's elements
+
+//Custom - Cristhian - Estos son estilos custom para algunos elementos de la plantilla
+
+//buttoms
+.raised {
+  box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
+  padding: 0.8em 1.365em 1em;
+  border: solid 3px rgb(47, 133, 204);
+  font-size: 0.85rem;
+  font-family: 'Lato', sans-serif;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+//form labels
+.custom-label {
+  font-weight: bold;
+  font-size: 0.88rem;
+  color: rgb(88, 88, 88);
+}
+//inputs or selects
+.custom-control {
+  font-weight: bold;
+  font-size: 0.89rem;
+  line-height: 0.9;
+  color: #35495e;
+}
+
+//inputs or selects
+.custom-control::placeholder {
+  color: #adadad;
+}
+//optinos inside select
+.custom-control option {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color: rgb(88, 88, 88);
+}
+
+select.custom-control:not([size]):not([multiple]) {
+  height: calc(1.6rem + 3px);
+  border-radius: 4px;
+  padding: 0 0.4rem;
+}
+
+.custom-control {
+  &[type='text'],
+  &[type='email'],
+  &[type='number'],
+  &[type='date'],
+  &[type='time'] {
+    height: calc(1.6rem + 2px);
+    border-radius: 4px;
+  }
+}
+//Errors in forms
+.invalid {
+  color: #c43d4b;
+  font-weight: bold;
+}
+
+//Buttons class .btn-link
+.btn-link {
+  color: #2a93d5;
+  font-weight: 600;
+}
+
+input[type='date']::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+input[type='time']::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+input[type='week']::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
