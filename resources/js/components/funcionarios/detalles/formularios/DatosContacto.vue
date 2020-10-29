@@ -107,7 +107,7 @@ export default {
   methods: {
       guardarDatosContacto() {
          
-          axios.put(`/funcionarios/${this.funcionarioEditar.id}/contacto/${this.funcionarioEditar.contactos_emergencia.id}/editar`, this.funcionarioEditar.contactos_emergencia).then(respuesta => {
+          axios.put(`/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/contacto/${this.funcionarioEditar.contactos_emergencia.id}/editar`, this.funcionarioEditar.contactos_emergencia).then(respuesta => {
             this.$emit('mensaje',  respuesta.data.message)
             this.mostrarModal = false
 

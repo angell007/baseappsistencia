@@ -138,7 +138,7 @@ export default {
 
   methods: {
     getTurnosRotativos() {
-      axios.get(`/api/turnos/rotativos/datos`).then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/turnos/rotativos/datos`).then(datos => {
         this.turnosRotativosDatos = this.turnosRotativosDatosBuscador =
           datos.data
       })
@@ -173,7 +173,7 @@ export default {
         .then(respuesta => {
           if (respuesta.value) {
             axios
-              .delete(`/api/turnos/${id}/rotativo/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/turnos/${id}/rotativo/eliminar`)
               .then(respuesta => {
                 this.$swal.fire(
                   'Eliminado',

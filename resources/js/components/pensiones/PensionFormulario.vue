@@ -71,7 +71,7 @@ export default {
     },
     postPension() {
       axios
-        .post('/api/pensiones/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/pensiones/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()
@@ -85,7 +85,7 @@ export default {
 
     putPension() {
       axios
-        .put(`/api/pensiones/${this.lista.id}/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/pensiones/${this.lista.id}/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()

@@ -137,10 +137,10 @@ export default {
         )
     },
     getUsuario(funcionarioIdentidad) {
-      return axios.get(`/api/nomina/pago/funcionarios/${funcionarioIdentidad}`)
+      return axios.get(`/api/${localStorage.getItem('tenant')}/nomina/pago/funcionarios/${funcionarioIdentidad}`)
     },
     cargarDatosEmpresa() {
-      return axios.get('/api/general/empresa/global')
+      return axios.get(`/api/${localStorage.getItem('tenant')}/general/empresa/global`)
     },
   },
   computed: {

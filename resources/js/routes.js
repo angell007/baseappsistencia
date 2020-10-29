@@ -68,7 +68,11 @@ export default {
       component: DependenciaPrincipal,
       name: 'DependenciaPrincipal',
     },
-    { path: '/centros_costos', component: CentroCostosPrincipal },
+    { 
+      path: '/centros_costos', 
+      component: CentroCostosPrincipal,
+      name: 'CentroCostosPrincipal' 
+    },
     {
       path: '/turnos',
       component: TurnoPrincipal,

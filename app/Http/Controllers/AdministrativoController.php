@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cliente;
-use App\Ticket;
-use App\Mensaje;
+use App\Models\Cliente;
+use App\Models\Ticket;
+use App\Models\Mensaje;
 //use Auth;
 //use Illuminate\Support\Facades\Auth as Auth1;
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ContableIngreso;
-use App\Empresa;
-use App\Funcionario;
-use App\Novedad;
+use App\Models\ContableIngreso;
+use App\Models\Empresa;
+use App\Models\Funcionario;
+use App\Models\Novedad;
 use App\Http\Libs\Nomina\Calculos\CalculoProvisiones;
 use App\Http\Libs\Nomina\Calculos\ResumenPago;
 
@@ -21,9 +21,9 @@ use App\Http\Libs\Nomina\Facades\NominaPago;
 
 
 
-use App\Deduccion;
+use App\Models\Deduccion;
 use Carbon\Carbon;
-use App\PagoNomina;
+use App\Models\PagoNomina;
 use PDF;
 
 

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Admin;
+use App\Models\Funcionario;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -14,6 +17,11 @@ class AuthController extends Controller
      * Login usuario y retornar el token
      * @return token
      */
+    public function __construct()
+    {
+        DB::getDefaultConnection();
+    }
+
     public function login(Request $request)
     {
 
@@ -27,8 +35,16 @@ class AuthController extends Controller
             return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        $user = Admin::find(Auth::user()->id);
-        return response()->json(['status' => 'success', 'token' => $token, 'User' => $user ], 200)->header('Authorization', $token);
+        $user = Admin::with("cliente")->find(Auth::user()->id); 
+
+        $ruta=$user["cliente"]["ruta"];
+        Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta );
+        $funcionario = new Funcionario();        
+        $funcionario->setConnection('Tenantcy');
+        $funcionario->find($user->funcionario_id);
+        DB::reconnect('Tenantcy');
+
+        return response()->json(['status' => 'success', 'token' => $token, 'ruta' => $ruta, 'User' => $funcionario ], 200)->header('Authorization', $token);
     }
 
     public function register()

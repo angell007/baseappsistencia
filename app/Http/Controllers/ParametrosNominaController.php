@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\NominaHorasExtras;
-use App\NominaSeguridadSocialFuncionario;
-use App\NominaSeguridadSocialEmpresa;
-use App\NominaRiesgosArl;
-use App\NominaParafiscales;
-use App\NominaIncapacidades;
-use App\Funcionario;
-use App\Empresa;
+use App\Models\NominaHorasExtras;
+use App\Models\NominaSeguridadSocialFuncionario;
+use App\Models\NominaSeguridadSocialEmpresa;
+use App\Models\NominaRiesgosArl;
+use App\Models\NominaParafiscales;
+use App\Models\NominaIncapacidades;
+use App\Models\Funcionario;
+use App\Models\Empresa;
 
 class ParametrosNominaController extends Controller
 {

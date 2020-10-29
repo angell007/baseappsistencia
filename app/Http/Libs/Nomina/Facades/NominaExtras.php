@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
-use App\NominaHorasExtras;
+use App\Models\Funcionario;
+use App\Models\NominaHorasExtras;
 use App\Http\Libs\Nomina\Calculos\CalculoExtra;
-use App\ReporteExtras;
+use App\Models\ReporteExtras;
 use App\Http\Libs\Nomina\PeriodoPago;
 
 class NominaExtras extends PeriodoPago

@@ -148,7 +148,7 @@ export default {
       if (validado) {
         if (!this.lista.id) {
           let respuesta = await axios.post(
-            `/api/funcionarios/${this.funcionario_identidad}/experiencia/crear`,
+            `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionario_identidad}/experiencia/crear`,
             this.$data.lista
           )
 

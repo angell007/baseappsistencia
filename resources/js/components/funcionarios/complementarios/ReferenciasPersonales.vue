@@ -126,7 +126,7 @@ export default {
       if (validado) {
         if (!this.lista.id) {
           let respuesta = await axios.post(
-            `/api/funcionarios/${this.funcionario_identidad}/referencia/crear`,
+            `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionario_identidad}/referencia/crear`,
             this.$data.lista
           )
 

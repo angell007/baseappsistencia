@@ -122,7 +122,7 @@ export default {
 
     getContratos() {
       axios
-        .get('/api/contratos/datos')
+        .get(`/api/${localStorage.getItem('tenant')}/contratos/datos`)
         .then(datos => {
           this.contratosDatos = this.contratosDatosBuscador = datos.data
         })
@@ -160,7 +160,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/contratos/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/contratos/${id}/eliminar`)
               .then(respuesta => {
                 this.getContratos()
                 this.$swal.fire('Correcto!', respuesta.data.message, 'success')

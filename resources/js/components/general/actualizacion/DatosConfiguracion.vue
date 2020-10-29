@@ -139,7 +139,7 @@ export default {
     guardarConfiguracionPago() {
       if (!this.empresaConfiguracion) {
         axios
-          .post(`/api/general/empresa/configuracion/crear`, this.configuracion)
+          .post(`/api/${localStorage.getItem('tenant')}/general/empresa/configuracion/crear`, this.configuracion)
           .then(respuesta => {
             modalEmitter.$emit('cerrar', 'datosConfiguracion')
             this.$emit('notificar', respuesta.data.message)
@@ -150,7 +150,7 @@ export default {
       } else {
         axios
           .put(
-            `/api/general/empresa/configuracion/${
+            `/api/${localStorage.getItem('tenant')}/general/empresa/configuracion/${
               this.configuracion.id
             }/editar`,
             this.configuracion

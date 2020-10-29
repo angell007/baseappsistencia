@@ -285,13 +285,13 @@ export default {
       let requestServer = null
       if (!fechaFin) {
         requestServer = axios.get(
-          `/api/nomina/liquidaciones/funcionarios/${
+          `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/funcionarios/${
             this.$route.params['id']
           }/mostrar`
         )
       } else {
         requestServer = axios.get(
-          `/api/nomina/liquidaciones/funcionarios/${
+          `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/funcionarios/${
             this.$route.params['id']
           }/mostrar/${fechaFin}`
         )
@@ -309,7 +309,7 @@ export default {
       const fechaFinContrato = moment(fechaFin).format('YYYY-MM-DD')
       axios
         .post(
-          `/api/nomina/liquidaciones/${
+          `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/${
             this.$route.params['id']
           }/vacaciones_actuales`,
           { diasAcumulados, fechaFin }
@@ -323,7 +323,7 @@ export default {
       const fechaFinContrato = moment(fechaFin).format('YYYY-MM-DD')
       axios
         .post(
-          `/api/nomina/liquidaciones/${this.$route.params['id']}/salario_base`,
+          `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/${this.$route.params['id']}/salario_base`,
           { salarioBase, fechaFin }
         )
         .then(datos => {
@@ -333,7 +333,7 @@ export default {
 
     postWithBases() {
       axios
-        .post(`/api/nomina/liquidaciones/${this.$route.params['id']}/bases`, {
+        .post(`/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/${this.$route.params['id']}/bases`, {
           fechaRetiro: moment(this.$refs.calendario.fechaSeleccionada).format(
             'YYYY-MM-DD'
           ),
@@ -350,7 +350,7 @@ export default {
     postWithIngresos(ingresos, egresos) {
       axios
         .post(
-          `/api/nomina/liquidaciones/${this.$route.params['id']}/ingresos`,
+          `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/${this.$route.params['id']}/ingresos`,
           { ingresos, egresos }
         )
         .then(datos => {
@@ -362,7 +362,7 @@ export default {
       axios({
         method: 'post',
         responseType: 'arraybuffer',
-        url: '/api/nomina/liquidaciones/previsualizacion',
+        url: `/api/${localStorage.getItem('tenant')}/nomina/liquidaciones/previsualizacion`,
         data: { funcionario: this.funcionario },
       }).then(respuesta => {
         let blob = new Blob([respuesta.data], { type: 'application/pdf' })

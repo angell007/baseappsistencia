@@ -26,6 +26,8 @@
           <rect x="0.5" y="15.5" width="25" height="1"></rect>
         </svg>
       </a>
+
+       <img alt="" src="/img/logo-cliente.png" class="logo-cliente">
     </div>
 
     <a class="navbar-logo" href="#">
@@ -100,7 +102,7 @@
           aria-expanded="false"
         >
           <span>
-            <img alt="" src="/img/logo-cliente.png" class="logo-cliente">
+           
             <i class="iconsmind-Administrator"></i>
           </span>
         </button>
@@ -112,6 +114,7 @@
       </div>
     </div>
   </nav>
+  <!--
   <modal id="NuevoTicket" ref="NuevoTicket" :esLg="false">
         <template slot="titulo">Nuevo Ticket de Soporte</template>
         <template slot="contenido">
@@ -152,7 +155,7 @@
             </div>
         </form>
         </template>
-    </modal>
+    </modal> -->
     </div>
 </template>
 

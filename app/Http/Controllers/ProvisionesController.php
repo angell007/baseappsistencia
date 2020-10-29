@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\PagoProvisionesNominaFuncionario;
+use App\Models\PagoProvisionesNominaFuncionario;
 use Illuminate\Support\Facades\DB;
-use App\PagoNomina;
+use App\Models\PagoNomina;
 use Carbon\Carbon;
 
 class ProvisionesController extends Controller

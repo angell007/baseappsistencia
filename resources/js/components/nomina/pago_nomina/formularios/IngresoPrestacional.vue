@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     getIngresosPrestacionales() {
-      axios.get('/api/nomina/pago/ingresos_prestacionales').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/nomina/pago/ingresos_prestacionales`).then(datos => {
         this.ingresosPDatos = datos.data
         this.lista.contable_ingreso_id = this.ingresosPDatos[0].id
         this.getDatosIngresosP()
@@ -98,7 +98,7 @@ export default {
     getDatosIngresosP() {
       axios
         .get(
-          `/api/ingresos_prestacionales/funcionarios/${this.funcionarioProp.id}`
+          `/api/${localStorage.getItem('tenant')}/ingresos_prestacionales/funcionarios/${this.funcionarioProp.id}`
         )
         .then(datos => {
           this.ingresosPFuncionarioDatos = datos.data
@@ -120,7 +120,7 @@ export default {
     postIngresoPrestacional() {
       this.lista['funcionario_id'] = this.funcionarioProp.id
       axios
-        .post('/api/ingresos_prestacionales/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/ingresos_prestacionales/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('cerrar', respuesta.data)
           setTimeout(() => {
@@ -152,7 +152,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/ingresos_prestacionales/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/ingresos_prestacionales/${id}/eliminar`)
               .then(respuesta => {
                 this.$swal.fire('Eliminado', respuesta.data.message, 'success')
                 this.getDatosIngresosP()

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Arl;
+use App\Models\Arl;
 
 class ArlController extends Controller
 {

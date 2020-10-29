@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DiarioTurnoRotativo;
-use App\DiarioTurnoFijo;
+use App\Models\DiarioTurnoRotativo;
+use App\Models\DiarioTurnoFijo;
 
 class DiariosController extends Controller
 {

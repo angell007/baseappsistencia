@@ -205,26 +205,26 @@ export default {
     },
     getLlegadasTarde() {
       return axios.get(
-        `/api/indicadores/tiempo/${this.fechaInicio}/${this.fechaFin}`
+        `/api/${localStorage.getItem('tenant')}/indicadores/tiempo/${this.fechaInicio}/${this.fechaFin}`
       )
     },
     getLlegadasTardeByDependencias() {
       return axios.get(
-        `/api/indicadores/tiempo/${this.fechaInicio}/${
+        `/api/${localStorage.getItem('tenant')}/indicadores/tiempo/${this.fechaInicio}/${
           this.fechaFin
         }/dependencias`
       )
     },
     getTopFuncionariosByRetardos() {
       return axios.get(
-        `/api/indicadores/tiempo/${this.fechaInicio}/${
+        `/api/${localStorage.getItem('tenant')}/indicadores/tiempo/${this.fechaInicio}/${
           this.fechaFin
         }/top_llegadas`
       )
     },
     getTopFuncionariosByTiempo() {
       return axios.get(
-        `/api/indicadores/tiempo/${this.fechaInicio}/${
+        `/api/${localStorage.getItem('tenant')}/indicadores/tiempo/${this.fechaInicio}/${
           this.fechaFin
         }/top_tiempo`
       )

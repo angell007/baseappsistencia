@@ -261,7 +261,7 @@ export default {
     postEncuesta() {
         this.lista["Preguntas"]=this.Preguntas;
       axios
-        .post('/api/encuestas/crear',  this.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/encuestas/crear`,  this.lista)
         .then(respuesta => {
           this.$swal.fire('Correcto', respuesta.data.message, 'success')
           this.$router.push('/encuestas')
@@ -273,7 +273,7 @@ export default {
 
     putEncuesta() {
       axios
-        .put(`/api/encuestas/${this.lista.id}/editar`, this.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/encuestas/${this.lista.id}/editar`, this.lista)
         .then(respuesta => {
           this.$swal.fire('Correcto', respuesta.data.message, 'success')
           this.$router.push('/encuestas')

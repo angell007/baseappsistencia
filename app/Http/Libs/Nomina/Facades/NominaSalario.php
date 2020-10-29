@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
-use App\Empresa;
-use App\Novedad;
+use App\Models\Funcionario;
+use App\Models\Empresa;
+use App\Models\Novedad;
 
 use App\Http\Libs\Nomina\Calculos\CalculoSalario;
 use App\Http\Libs\Nomina\Calculos\CalculoNovedades;

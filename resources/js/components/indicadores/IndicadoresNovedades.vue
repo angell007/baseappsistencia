@@ -181,24 +181,24 @@ export default {
     },
     getNovedades() {
       return axios.get(
-        `/api/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}`
+        `/api/${localStorage.getItem('tenant')}/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}`
       )
     },
     getNovedadesByDependencia() {
       return axios.get(
-        `/api/indicadores/novedades/${this.fechaInicio}/${
+        `/api/${localStorage.getItem('tenant')}/indicadores/novedades/${this.fechaInicio}/${
           this.fechaFin
         }/dependencias`
       )
     },
     getNovedadesByTipo() {
       return axios.get(
-        `/api/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}/tipo`
+        `/api/${localStorage.getItem('tenant')}/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}/tipo`
       )
     },
     getTopFuncionarios() {
       return axios.get(
-        `/api/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}/top`
+        `/api/${localStorage.getItem('tenant')}/indicadores/novedades/${this.fechaInicio}/${this.fechaFin}/top`
       )
     },
     filtrarPorDependencia(centroCosto) {

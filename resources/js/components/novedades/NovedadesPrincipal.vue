@@ -202,7 +202,7 @@ export default {
   methods: {
     cargarNovedades(fechaInicio, fechaFin) {
       axios
-        .get(`/api/novedades/datos/${fechaInicio}/${fechaFin}`)
+        .get(`/api/${localStorage.getItem('tenant')}/novedades/datos/${fechaInicio}/${fechaFin}`)
         .then(datos => {
           this.novedadesDatos = datos.data
         })
@@ -273,7 +273,7 @@ export default {
         })
         .then(resultado => {
           if (resultado.value) {
-            axios.delete(`/api/novedades/${id}/eliminar`).then(respuesta => {
+            axios.delete(`/api/${localStorage.getItem('tenant')}/novedades/${id}/eliminar`).then(respuesta => {
               this.$swal.fire('Eliminada!', respuesta.data.message, 'success')
             })
           }

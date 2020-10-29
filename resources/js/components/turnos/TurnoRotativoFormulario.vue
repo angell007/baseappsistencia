@@ -144,7 +144,7 @@ export default {
       this.lista.jornada_turno = 'Diurno'
       this.lista.color = this.colorAletatorio()
       axios
-        .post('/api/turnos/rotativo/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/turnos/rotativo/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('cerrar')
           this.$swal.fire('Correcto', respuesta.data.message, 'success')
@@ -159,7 +159,7 @@ export default {
 
     putTurno() {
       axios
-        .put(`/api/turnos/${this.lista.id}/rotativo/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/turnos/${this.lista.id}/rotativo/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('cerrar')
           this.$swal.fire('Correcto', respuesta.data.message, 'success')

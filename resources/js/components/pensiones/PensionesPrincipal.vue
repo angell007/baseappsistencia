@@ -117,7 +117,7 @@ export default {
     },
 
     getPensiones() {
-      axios.get('/api/pensiones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/pensiones/datos`).then(datos => {
         this.pensionesDatos = this.pensionesDatosBuscador = datos.data
       })
     },

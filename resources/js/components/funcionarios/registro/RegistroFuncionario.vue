@@ -119,7 +119,7 @@ export default {
       data.append('image', this.$refs.datosBasicos.imagenTemporal)
 
       axios
-        .post('/api/funcionarios/crear', data)
+        .post(`/api/${localStorage.getItem('tenant')}/funcionarios/crear`, data)
         .then(respuesta => {
           this.$swal.fire('Bien hecho!', respuesta.data.message, 'success')
           this.limpiarFormulario()

@@ -169,7 +169,7 @@ export default {
 
   methods: {
     getTurnosFijos() {
-      axios.get(`/api/turnos/fijos/datos`).then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/turnos/fijos/datos`).then(datos => {
         this.turnosFijos = this.turnosFijosBuscador = datos.data
         this.renderizar = true
       })
@@ -188,7 +188,7 @@ export default {
 
     deleteTurnoFijo(id) {
       if (confirm('¿Seguro que desea borrar el turno')) {
-        axios.delete(`/api/turnos/${id}/fijo/eliminar`).then(respuesta => {})
+        axios.delete(`/api/${localStorage.getItem('tenant')}/turnos/${id}/fijo/eliminar`).then(respuesta => {})
         this.getTurnosFijos()
       }
     },
@@ -201,7 +201,7 @@ export default {
         })
         return false
       }
-      axios.get(`/api/horario/turno_fijo/datos/${turnoId}`).then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/horario/turno_fijo/datos/${turnoId}`).then(datos => {
         this.horariosTurnoFijo = datos.data
         $('#horaTurnoFijo').modal({
           backdrop: 'static',

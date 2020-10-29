@@ -223,7 +223,7 @@ export default {
 
     getReporteHorariosRotativo() {
       return axios.get(
-        `/api/reporte/horarios/${this.fechaInicio}/${
+        `/api/${localStorage.getItem('tenant')}/reporte/horarios/${this.fechaInicio}/${
           this.fechaFin
         }/turno_rotativo`
       )
@@ -231,7 +231,7 @@ export default {
 
     getReporteHorariosFijo() {
       return axios.get(
-        `/api/reporte/horarios/${this.fechaInicio}/${this.fechaFin}/turno_fijo`
+        `/api/${localStorage.getItem('tenant')}/reporte/horarios/${this.fechaInicio}/${this.fechaFin}/turno_fijo`
       )
     },
 

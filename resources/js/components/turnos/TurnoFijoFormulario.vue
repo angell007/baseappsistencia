@@ -373,7 +373,7 @@ export default {
     postTurno() {
       this.lista.color = this.colorAletatorio()
       axios
-        .post('/api/turnos/fijo/crear', this.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/turnos/fijo/crear`, this.lista)
         .then(respuesta => {
           this.$emit('recargar')
           /** Guardar horarios turno */
@@ -386,7 +386,7 @@ export default {
 
     putTurno() {
       axios
-        .put(`/api/turnos/${this.lista.id}/fijo/editar`, this.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/turnos/${this.lista.id}/fijo/editar`, this.lista)
         .then(respuesta => {
           this.$emit('recargar')
           /** Actualizar horarios turno */
@@ -453,9 +453,9 @@ export default {
 
     postOrPutHorario(horario) {
       if (!horario.id) {
-        axios.post('/api/horario/turno_fijo/crear', horario)
+        axios.post(`/api/${localStorage.getItem('tenant')}/horario/turno_fijo/crear`, horario)
       } else {
-        axios.put(`/api/horario/turno_fijo/${horario.id}/editar`, horario)
+        axios.put(`/api/${localStorage.getItem('tenant')}/horario/turno_fijo/${horario.id}/editar`, horario)
       }
     },
 

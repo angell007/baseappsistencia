@@ -109,7 +109,7 @@ export default {
 
   methods: {
       guardarDatosExperiencia() {
-          axios.put(`/funcionarios/${this.funcionarioEditar.id}/editar`, this.funcionarioEditar).then(respuesta => {
+          axios.put(`/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/editar`, this.funcionarioEditar).then(respuesta => {
             this.$emit('mensaje',  respuesta.data.message)
              
           })

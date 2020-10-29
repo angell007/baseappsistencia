@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cesantia;
+use App\Models\Cesantia;
 
 class CesantiasController extends Controller
 {

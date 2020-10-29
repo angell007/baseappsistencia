@@ -2,9 +2,9 @@
 
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
-use App\Empresa;
-use App\PagoNomina;
+use App\Models\Funcionario;
+use App\Models\Empresa;
+use App\Models\PagoNomina;
 
 use App\Http\Libs\Nomina\Calculos\CalculoLiquidacion;
 use App\Http\Libs\Nomina\Calculos\CalculoIndemnizacion;

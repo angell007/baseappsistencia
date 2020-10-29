@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Funcionario;
-use App\LlegadaTarde;
-use App\Novedad;
+use App\Models\Funcionario;
+use App\Models\LlegadaTarde;
+use App\Models\Novedad;
 use Illuminate\Support\Facades\DB;
 
 class TableroController extends Controller

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Novedad;
-use App\Funcionario;
+use App\Models\Novedad;
+use App\Models\Funcionario;
 use Illuminate\Support\Facades\DB;
-use App\CentroCosto;
+use App\Models\CentroCosto;
 
 class IndicadoresController extends Controller
 {

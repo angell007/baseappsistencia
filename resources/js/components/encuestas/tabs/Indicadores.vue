@@ -75,7 +75,7 @@ export default {
     methods: {
         cargarIndicadores(fechaInicio, fechaFin) {
         axios
-            .get(`/api/encuestas/indicadores/${this.encuesta}/${fechaInicio}/${fechaFin}`)
+            .get(`/api/${localStorage.getItem('tenant')}/encuestas/indicadores/${this.encuesta}/${fechaInicio}/${fechaFin}`)
             .then(datos => {
                 this.Indicadores = datos.data;
                 this.renderizarContenido = true;
@@ -83,7 +83,7 @@ export default {
         },
         filtrarIndicadores(fechaInicio, fechaFin) {
         axios
-            .get(`/api/encuestas/indicadores/${this.encuesta}/${fechaInicio}/${fechaFin}`)
+            .get(`/api/${localStorage.getItem('tenant')}/encuestas/indicadores/${this.encuesta}/${fechaInicio}/${fechaFin}`)
             .then(datos => {
                 this.Indicadores = datos.data;
                 this.renderizarContenido = true;

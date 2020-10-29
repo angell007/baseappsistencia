@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Funcionario;
-use App\Novedad;
-use App\ContableLicenciaIncapacidad;
+use App\Models\Funcionario;
+use App\Models\Novedad;
+use App\Models\ContableLicenciaIncapacidad;
 
 class NovedadesController extends Controller
 {

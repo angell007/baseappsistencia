@@ -85,14 +85,14 @@ export default {
 
     getProvisiones(mes = null) {
       if (!mes) {
-        return axios.get('/api/nomina/provisiones/')
+        return axios.get(`/api/${localStorage.getItem('tenant')}/nomina/provisiones/`)
       }
-      return axios.get(`/api/nomina/provisiones/${mes}`)
+      return axios.get(`/api/${localStorage.getItem('tenant')}/nomina/provisiones/${mes}`)
     },
     getMesesProvisiones() {
       this.datosGrafica = []
       if (!this.meses.length) {
-        axios.get('/api/nomina/provisiones/meses').then(datos => {
+        axios.get(`/api/${localStorage.getItem('tenant')}/nomina/provisiones/meses`).then(datos => {
           this.makeMeses(datos.data)
           this.makeGrafica()
           this.renderizar = true

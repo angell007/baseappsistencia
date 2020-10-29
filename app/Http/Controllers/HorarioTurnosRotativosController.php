@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CentroCosto;
-use App\HorarioTurnoRotativo;
+use App\Models\CentroCosto;
+use App\Models\HorarioTurnoRotativo;
 
 class HorarioTurnosRotativosController extends Controller
 {

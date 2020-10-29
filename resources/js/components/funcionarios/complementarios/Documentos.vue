@@ -42,7 +42,7 @@ export default {
     },
     getConfig(identidad) {
       return {
-        url: `/api/funcionarios/${identidad}/documento/crear`,
+        url: `/api/${localStorage.getItem('tenant')}/funcionarios/${identidad}/documento/crear`,
         dictDefaultMessage: 'Agregar los documentos en esta zona',
         addRemoveLinks: true,
         maxFiles: 4,

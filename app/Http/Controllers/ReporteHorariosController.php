@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\CentroCosto;
+use App\Models\CentroCosto;
 use Illuminate\Support\Facades\DB;
 
 class ReporteHorariosController extends Controller

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CentroCosto;
-use App\ReporteExtras;
+use App\Models\CentroCosto;
+use App\Models\ReporteExtras;
 
 class HorasExtrasController extends Controller
 {

@@ -243,7 +243,7 @@ export default {
 
     getExtrasValidadas(funcionario, fecha) {
       axios
-        .get(`/api/horas_extras/datos/validados/${funcionario}/${fecha}`)
+        .get(`/api/${localStorage.getItem('tenant')}/horas_extras/datos/validados/${funcionario}/${fecha}`)
         .then(datos => {
           this.extrasValidadas = datos.data
           this.extraValidada =
@@ -306,7 +306,7 @@ export default {
             if (this.extraValidada) {
               axios
                 .put(
-                  `/api/horas_extras/${this.extrasValidadas.id}/actualizar`,
+                  `/api/${localStorage.getItem('tenant')}/horas_extras/${this.extrasValidadas.id}/actualizar`,
                   reporte
                 )
                 .then(respuesta => {
@@ -319,7 +319,7 @@ export default {
                   )
                 })
             } else {
-              axios.post('/api/horas_extras/crear', reporte).then(respuesta => {
+              axios.post(`/api/${localStorage.getItem('tenant')}/horas_extras/crear`, reporte).then(respuesta => {
                 this.$swal.fire(
                   'Guardada!',
                   'La validación de horas extras para ' +
@@ -343,7 +343,7 @@ export default {
     putDiario() {
       axios
         .put(
-          `/api/diarios/turno_rotativo/${this.diarioDato.id}/actualizar`,
+          `/api/${localStorage.getItem('tenant')}/diarios/turno_rotativo/${this.diarioDato.id}/actualizar`,
           this.$data.diarioDato
         )
         .then(respuesta => {

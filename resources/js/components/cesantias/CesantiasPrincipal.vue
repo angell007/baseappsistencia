@@ -124,7 +124,7 @@ export default {
     },
 
     getCesantias() {
-      axios.get('/api/cesantias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/cesantias/datos`).then(datos => {
         this.cesantiasDatos = this.cesantiasDatosBuscador = datos.data
       })
     },
@@ -151,7 +151,7 @@ export default {
         })
         .then(resultado => {
           if (resultado.value) {
-            axios.delete(`/api/cesantias/${id}/eliminar`).then(respuesta => {
+            axios.delete(`/api/${localStorage.getItem('tenant')}/cesantias/${id}/eliminar`).then(respuesta => {
               this.getCesantias()
               this.$swal.fire('Correcto!', respuesta.data.message, 'success')
             })

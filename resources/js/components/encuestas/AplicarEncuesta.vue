@@ -226,7 +226,7 @@ export default {
     },
     methods: {
         obtenerFuncionario(identidad) {
-            axios.get(`/api/funcionarios/${identidad}/mostrar`).then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/funcionarios/${identidad}/mostrar`).then(datos => {
                 this.funcionario = datos.data.nombres+" "+datos.data.apellidos;
                 this.funcionario_id = datos.data.id;
                 this.validarEncuesta();
@@ -234,17 +234,17 @@ export default {
         },
 
         obtenerDatosEmpresa() {
-            axios.get('/api/general/empresa/global').then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/general/empresa/global`).then(datos => {
                 this.empresa=datos.data.razon_social;
             })
         },
         obtenerEncuesta(id){
-            axios.get(`/api/encuestas/${id}/mostrar`).then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/encuestas/${id}/mostrar`).then(datos => {
                 this.encuesta = datos.data;
             })
         },
         validarEncuesta(){
-            axios.get(`/api/encuestas/${this.encuesta_id}/${this.funcionario_id}/${this.fecha}/validar`).then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/encuestas/${this.encuesta_id}/${this.funcionario_id}/${this.fecha}/validar`).then(datos => {
                 this.encuesta_aplicada = datos.data;
                 this.mostrar=true;
             })
@@ -264,7 +264,7 @@ export default {
         GuardarEncuesta(){
             this.encuesta["funcionario_id"]=this.funcionario_id;
       axios
-        .post('/api/encuestas/responder',  this.encuesta)
+        .post(`/api/${localStorage.getItem('tenant')}/encuestas/responder`,  this.encuesta)
         .then(respuesta => {
           this.$swal.fire('Correcto', respuesta.data.message, 'success')
           this.encuesta_aplicada=true;

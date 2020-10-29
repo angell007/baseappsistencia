@@ -98,7 +98,7 @@ export default {
   methods: {
     cargarFuncionarios() {
       axios
-        .get('/api/funcionarios/datos')
+        .get(`/api/${localStorage.getItem('tenant')}/funcionarios/datos`)
         .then(datos => {
           this.funcionariosDatos = datos.data
         })

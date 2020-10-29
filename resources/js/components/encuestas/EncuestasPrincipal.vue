@@ -125,7 +125,7 @@ export default {
             })
         },
         cargarEncuestas() {
-            axios.get('/api/encuestas/datos').then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/encuestas/datos`).then(datos => {
                 this.encuestasDatos = this.encuestasDatosBuscador = datos.data
             })
         },
@@ -147,7 +147,7 @@ export default {
                 })
                 .then(resultado => {
                 if (resultado.value) {
-                    axios.delete(`/api/encuestas/${id}/eliminar`).then(respuesta => {
+                    axios.delete(`/api/${localStorage.getItem('tenant')}/encuestas/${id}/eliminar`).then(respuesta => {
                     this.cargarEncuestas()
                     this.$swal.fire('Correcto!', respuesta.data.message, 'success')
                     })

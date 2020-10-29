@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CajaCompensacion;
+use App\Models\CajaCompensacion;
 
 class CajasCompensacionController extends Controller
 {

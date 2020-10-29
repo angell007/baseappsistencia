@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\EmpresaConfiguracion;
+use App\Models\EmpresaConfiguracion;
 use Auth;
 
 class EmpresaConfiguracionController extends Controller
@@ -12,7 +12,7 @@ class EmpresaConfiguracionController extends Controller
     public function index(Request $request)
     {
 
-        $id_empresa = $request->user()->empresa_id;
+        //$id_empresa = $request->user()->empresa_id;
         $empresaConfiguracion =  EmpresaConfiguracion::first();
         if (!$empresaConfiguracion) {
             return response()->json(['message' => 'Configuración no encontrada', 'status' => 404], 404);

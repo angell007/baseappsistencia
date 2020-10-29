@@ -579,7 +579,7 @@ export default {
       )
     },
     comprobarRegistro() {
-      axios.get('/api/general/empresa/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/general/empresa/datos`).then(datos => {
         if (datos.data.length > 0) {
           this.$swal.fire(
             'Hecho!',
@@ -617,7 +617,7 @@ export default {
     },
     postEmpresaFormulario() {
       axios
-        .post('/api/general/empresa/crear', this.$data.empresa)
+        .post(`/api/${localStorage.getItem('tenant')}/general/empresa/crear`, this.$data.empresa)
         .then(respuesta => {
           this.$swal('Excelente!', respuesta.data.message, 'success').then(
             () => {
@@ -632,10 +632,10 @@ export default {
         })
     },
     getArlDatos() {
-      return axios.get('/api/arl/datos')
+      return axios.get(`/api/${localStorage.getItem('tenant')}/arl/datos`)
     },
     getBancosDatos() {
-      return axios.get('/api/bancos/datos')
+      return axios.get(`/api/${localStorage.getItem('tenant')}/bancos/datos`)
     },
     limpiarFormulario() {
       for (let prop in this.$data.empresa) {

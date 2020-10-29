@@ -126,7 +126,7 @@ export default {
     },
 
     getEps() {
-      axios.get('/api/eps/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/eps/datos`).then(datos => {
         this.epsDatos = this.epsDatosBuscador = datos.data
       })
     },
@@ -154,7 +154,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/eps/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/eps/${id}/eliminar`)
               .then(respuesta => {
                 this.getEps()
                 this.$swal.fire('Correcto!', respuesta.data.message, 'success')

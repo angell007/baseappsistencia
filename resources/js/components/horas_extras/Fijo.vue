@@ -339,7 +339,7 @@ export default {
 
     cargarExtrasValidadas(funcionario, fecha) {
       axios
-        .get(`/api/horas_extras/datos/validados/${funcionario}/${fecha}`)
+        .get(`/api/${localStorage.getItem('tenant')}/horas_extras/datos/validados/${funcionario}/${fecha}`)
         .then(datos => {
           this.extrasValidadas = datos.data
           this.validada =
@@ -369,7 +369,7 @@ export default {
     actualizarDiarioFijo() {
       axios
         .put(
-          `/api/diarios/turno_fijo/${this.diarioDato.id}/actualizar`,
+          `/api/${localStorage.getItem('tenant')}/diarios/turno_fijo/${this.diarioDato.id}/actualizar`,
           this.$data.diarioDato
         )
         .then(respuesta => {
@@ -413,7 +413,7 @@ export default {
             if (this.validada === true) {
               axios
                 .put(
-                  `/api/horas_extras/${this.extrasValidadas.id}/actualizar`,
+                 `/api/${localStorage.getItem('tenant')}/horas_extras/${this.extrasValidadas.id}/actualizar`,
                   reporte
                 )
                 .then(respuesta => {
@@ -426,7 +426,7 @@ export default {
                   )
                 })
             } else {
-              axios.post('/api/horas_extras/crear', reporte).then(respuesta => {
+              axios.post(`/api/${localStorage.getItem('tenant')}/horas_extras/crear`, reporte).then(respuesta => {
                 this.validada = true
                 this.$swal.fire(
                   'Guardada!',

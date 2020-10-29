@@ -136,7 +136,7 @@ export default {
     },
     getHorasExtrasDatos() {
       return axios.get(
-        `/api/nomina/extras/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/extras/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
@@ -146,42 +146,42 @@ export default {
     },
     getSalarioDiasTrabajados() {
       return axios.get(
-        `/api/nomina/salario/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/salario/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
     },
     getNovedadesDatos() {
       return axios.get(
-        `/api/nomina/novedades/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/novedades/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
     },
     getIngresosDatos() {
       return axios.get(
-        `/api/nomina/ingresos/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/ingresos/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
     },
     getRetencionesDatos() {
       return axios.get(
-        `/api/nomina/retenciones/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/retenciones/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
     },
     getDeduccionesDatos() {
       return axios.get(
-        `/api/nomina/deducciones/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/deducciones/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
     },
     getPagoNeto() {
       return axios.get(
-        `/api/nomina/pago-neto/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/pago-neto/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )

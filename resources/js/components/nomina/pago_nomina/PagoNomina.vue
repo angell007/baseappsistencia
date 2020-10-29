@@ -278,15 +278,15 @@ export default {
     setUris() {
       this.uriPagoNomina =
         this.inicioParemeter && this.finParemeter
-          ? `/api/nomina/pago/${this.inicioParemeter}/${this.finParemeter}`
-          : '/api/nomina/pago'
+          ? `/api/${localStorage.getItem('tenant')}/nomina/pago/${this.inicioParemeter}/${this.finParemeter}`
+          : `/api/${localStorage.getItem('tenant')}/nomina/pago`
 
       this.uriPagoFuncionarios =
         this.inicioParemeter && this.finParemeter
-          ? `/api/nomina/pago/funcionarios/${this.inicioParemeter}/${
+          ? `/api/${localStorage.getItem('tenant')}/nomina/pago/funcionarios/${this.inicioParemeter}/${
               this.finParemeter
             }`
-          : '/api/nomina/pago/funcionarios'
+          : `/api/${localStorage.getItem('tenant')}/nomina/pago/funcionarios`
     },
 
     getPagoNomina() {
@@ -310,7 +310,7 @@ export default {
     getUsuario() {
       const token = 'Bearer '.concat(localStorage.getItem('token'))
       axios
-        .get('/api/auth/user', {
+        .get(`/api/auth/user`, {
           headers: { Authorization: token },
         })
         .then(datos => {
@@ -415,7 +415,7 @@ export default {
         .then(result => {
           if (result.value) {
             this.renderizar = false
-            axios.post('/api/nomina/pago/nomina', this.pago).then(respuesta => {
+            axios.post(`/api/${localStorage.getItem('tenant')}/nomina/pago/nomina`, this.pago).then(respuesta => {
               this.$swal.fire('Correcto!', respuesta.data.message, 'success')
               this.getPagoNomina()
             })
@@ -425,7 +425,7 @@ export default {
 
     deletePagoNomina() {
       axios
-        .delete(`/api/nomina/pago/${this.pago.id}/eliminar`)
+        .delete(`/api/${localStorage.getItem('tenant')}/nomina/pago/${this.pago.id}/eliminar`)
         .then(respuesta => {
           this.renderizar = false
           this.getPagoNomina()
@@ -448,7 +448,7 @@ export default {
       axios({
         method: 'get',
         responseType: 'arraybuffer',
-        url: `/api/nomina/colilla/funcionarios/${funcionario.id}/${
+        url: `/api/${localStorage.getItem('tenant')}/nomina/colilla/funcionarios/${funcionario.id}/${
           this.nomina.inicio_periodo
         }/${this.nomina.fin_periodo}`,
       }).then(respuesta => {

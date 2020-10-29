@@ -76,7 +76,7 @@ Route::group([
     Route::post('/asistencia/validar', [AsistenciaController::class, 'validar']);
 
     /** Rutas del Módulo General (empresa) */
-    Route::get('/general/empresa/datos', [EmpresasController::class, 'getDatos'])->middleware('auth:api');
+    Route::get('/general/empresa/datos', [EmpresasController::class, 'getDatos']);//->middleware('auth:api');
     Route::get('/general/empresa/global', [EmpresasController::class, 'getGlobal']);
     Route::post('/general/empresa/crear', [EmpresasController::class, 'store']);
     Route::get('/general/empresa/mostrar', [EmpresasController::class, 'show']);
@@ -90,7 +90,7 @@ Route::group([
     Route::get('bancos/datos', [BancosController::class, 'index']);
 
     /** Rutas del Módulo de Configuracion de pagos de la empresa */
-    Route::get('general/empresa/configuracion', [EmpresaConfiguracionController::class, 'index'])->middleware('auth:api');
+    Route::get('general/empresa/configuracion', [EmpresaConfiguracionController::class, 'index']);//->middleware('auth:api');
     Route::get('/general/empresa/configuracion/{id}', [EmpresaConfiguracionController::class, 'show']);
     Route::post('/general/empresa/configuracion/crear', [EmpresaConfiguracionController::class, 'store']);
     Route::put('/general/empresa/configuracion/{id}/editar', [EmpresaConfiguracionController::class, 'update']);
@@ -469,3 +469,4 @@ Route::group([
         ], 404);
     });
 });
+ 

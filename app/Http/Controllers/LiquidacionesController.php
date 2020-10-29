@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Libs\Nomina\Facades\NominaLiquidacion;
-use App\Funcionario;
+use App\Models\Funcionario;
 use PDF;
-use App\Empresa;
+use App\Models\Empresa;
 
 class LiquidacionesController extends Controller
 {

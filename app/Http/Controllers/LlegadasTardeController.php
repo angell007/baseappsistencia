@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\LlegadaTarde;
-use App\CentroCosto;
+use App\Models\LlegadaTarde;
+use App\Models\CentroCosto;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class LlegadasTardeController extends Controller

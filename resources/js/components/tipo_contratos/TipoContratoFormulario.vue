@@ -55,7 +55,7 @@ export default {
     },
     postContrato() {
       axios
-        .post('/api/contratos/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/contratos/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarFormulario()
@@ -69,7 +69,7 @@ export default {
 
     putContrato() {
       axios
-        .put(`/api/contratos/${this.lista.id}/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/contratos/${this.lista.id}/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarFormulario()

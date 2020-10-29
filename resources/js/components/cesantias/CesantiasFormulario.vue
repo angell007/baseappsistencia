@@ -69,7 +69,7 @@ export default {
     },
     postCesantia() {
       axios
-        .post('/api/cesantias/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/cesantias/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()
@@ -82,7 +82,7 @@ export default {
     },
     putCesantia() {
       axios
-        .put(`/api/cesantias/${this.lista.id}/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/cesantias/${this.lista.id}/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()

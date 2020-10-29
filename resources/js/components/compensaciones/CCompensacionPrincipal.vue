@@ -137,7 +137,7 @@ export default {
 
   methods: {
     getCompensaciones() {
-      axios.get('/api/compensaciones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/compensaciones/datos`).then(datos => {
         this.compensacionesDatos = this.compensacionesDatosBuscador = datos.data
       })
     },
@@ -162,7 +162,7 @@ export default {
       this.confirmacionUsuario().then(resultado => {
         if (resultado.value) {
           axios
-            .delete(`/api/compensaciones/${id}/eliminar`)
+            .delete(`/api/${localStorage.getItem('tenant')}/compensaciones/${id}/eliminar`)
             .then(respuesta => {
               this.getCompensaciones()
               this.$swal.fire('Correcto!', respuesta.data.message, 'success')

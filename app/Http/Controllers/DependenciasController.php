@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dependencia;
+use App\Models\Dependencia;
 
 class DependenciasController extends Controller
 {

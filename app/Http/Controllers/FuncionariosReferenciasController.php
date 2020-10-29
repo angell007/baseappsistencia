@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\FuncionarioReferenciaPersonal;
-use App\Funcionario;
+use App\Models\FuncionarioReferenciaPersonal;
+use App\Models\Funcionario;
 
 class FuncionariosReferenciasController extends Controller
 {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Libs\Nomina\Calculos;
 
-use App\NominaSeguridadSocialEmpresa;
-use App\NominaRiesgosArl;
-use App\Funcionario;
-use App\NominaParafiscales;
-use App\NominaSeguridadSocialFuncionario;
+use App\Models\NominaSeguridadSocialEmpresa;
+use App\Models\NominaRiesgosArl;
+use App\Models\Funcionario;
+use App\Models\NominaParafiscales;
+use App\Models\NominaSeguridadSocialFuncionario;
 
 
 trait Porcentaje

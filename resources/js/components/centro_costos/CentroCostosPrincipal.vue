@@ -114,7 +114,7 @@ export default {
   methods: {
     cargarCentrosCostos() {
       axios
-        .get('/api/centros_costos/datos')
+        .get(`/api/${localStorage.getItem('tenant')}/centros_costos/datos`)
         .then(datos => {
           this.centrosCostos = this.centrosCostosBuscador = datos.data
         })
@@ -153,7 +153,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/centros_costos/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/centros_costos/${id}/eliminar`)
               .then(respuesta => {
                 this.cargarCentrosCostos()
                 this.$swal.fire('Correcto!', respuesta.data.message, 'success')

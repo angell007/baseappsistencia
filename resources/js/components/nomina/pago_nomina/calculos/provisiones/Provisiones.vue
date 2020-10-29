@@ -60,7 +60,7 @@ export default {
   methods: {
     async getProvisionesDatos() {
       let datos = await axios.get(
-        `/api/nomina/provisiones/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/provisiones/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )

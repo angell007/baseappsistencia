@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Banco;
+use App\Models\Banco;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class BancosController extends Controller
 {
     public function index()
     {
-        return Banco::get(['id', 'nombre']);
+        //Config::set("database.connections.mysql.database", 'geneticapp');
+        $banco = new Banco();
+        $banco->setConnection('mysql');
+        DB::reconnect('mysql');
+        return $banco->get(['id', 'nombre']);
+
     }
 }

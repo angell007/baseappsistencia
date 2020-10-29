@@ -364,7 +364,7 @@ export default {
   data() {
     return {
       renderizar: false,
-      BASE_URL: '/api/parametrizacion',
+      BASE_URL: `/api/${localStorage.getItem('tenant')}/parametrizacion`,
       salarioSubsidioDatos: [],
       ingresosConstitutivosDatos: [],
       ingresosNoConstitutivosDatos: [],

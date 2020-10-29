@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Eps;
+use App\Models\Eps;
 
 class EpsController extends Controller
 {

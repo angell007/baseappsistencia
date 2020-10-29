@@ -80,7 +80,7 @@ export default {
       this.lista.dependencia_id = this.dependenciaObjeto.id
       if (!this.lista.id) {
         axios
-          .post('/api/cargos/crear', this.$data.lista)
+          .post(`/api/${localStorage.getItem('tenant')}/cargos/crear`, this.$data.lista)
           .then(respuesta => {
             this.finalizar()
           })
@@ -93,7 +93,7 @@ export default {
           })
       } else {
         axios
-          .put(`/api/cargos/${this.lista.id}/editar`, this.$data.lista)
+          .put(`/api/${localStorage.getItem('tenant')}/cargos/${this.lista.id}/editar`, this.$data.lista)
           .then(respuesta => {
             this.finalizar()
           })
@@ -107,7 +107,7 @@ export default {
       }
     },
     cargarDependencias() {
-      axios.get('/api/dependencias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/dependencias/datos`).then(datos => {
         this.dependenciasDatos = datos.data
       })
     },

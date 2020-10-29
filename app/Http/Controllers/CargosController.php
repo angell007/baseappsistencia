@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cargo;
+use App\Models\Cargo;
 
 class CargosController extends Controller
 {

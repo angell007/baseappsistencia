@@ -404,7 +404,7 @@ export default {
 
   methods: {
     obtenerFuncionario(identidad) {
-      axios.get(`/api/funcionarios/${identidad}/mostrar`).then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/funcionarios/${identidad}/mostrar`).then(datos => {
         this.funcionario = datos.data
         this.rutaImagen = `/back/storage/app/public/${this.funcionario.image}`
         this.mostrarInfo = true
@@ -412,7 +412,7 @@ export default {
     },
 
     obtenerDatosEmpresa() {
-      axios.get('/api/general/empresa/global').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/general/empresa/global`).then(datos => {
         this.arl = datos.data.arl.nombre
         this.salarioBase = datos.data.salario_base
         this.frecuencia_pago = datos.data.frecuencia_pago

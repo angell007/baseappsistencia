@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\FuncionarioContactoEmergencia;
-use App\Funcionario;
+use App\Models\FuncionarioContactoEmergencia;
+use App\Models\Funcionario;
 
 class FuncionariosContactoEmergenciaController extends Controller
 {

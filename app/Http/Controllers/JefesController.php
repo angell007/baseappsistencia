@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jefe;
+use App\Models\Jefe;
 
 class JefesController extends Controller
 {

@@ -43,7 +43,7 @@ export default {
 
     getCentrosCostos() {
       if (!this.centrosCostosDatos.length) {
-        axios.get('/api/centros_costos/datos').then(datos => {
+        axios.get(`/api/${localStorage.getItem('tenant')}/centros_costos/datos`).then(datos => {
           this.centrosCostosDatos = datos.data
           this.mostrarModal()
         })

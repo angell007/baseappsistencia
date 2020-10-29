@@ -78,7 +78,7 @@ export default {
       this.lista.centro_costo_id = this.centroCostosObjeto.id
       if (!this.lista.id) {
         axios
-          .post('/api/dependencias/crear', this.$data.lista)
+          .post(`/api/${localStorage.getItem('tenant')}/dependencias/crear`, this.$data.lista)
           .then(respuesta => {
             this.$emit('recargar')
             this.limpiarFormulario()
@@ -95,7 +95,7 @@ export default {
           })
       } else {
         axios
-          .put(`/api/dependencias/${this.lista.id}/editar`, this.$data.lista)
+          .put(`/api/${localStorage.getItem('tenant')}/dependencias/${this.lista.id}/editar`, this.$data.lista)
           .then(respuesta => {
             this.$emit('recargar')
             this.limpiarFormulario()
@@ -113,7 +113,7 @@ export default {
       }
     },
     cargarCentrosCostos() {
-      axios.get('/api/centros_costos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/centros_costos/datos`).then(datos => {
         this.centrosCostosDatos = datos.data
       })
     },

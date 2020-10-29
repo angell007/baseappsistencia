@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Empresa;
+use App\Models\Empresa;
 use App\Admin;
 //use Auth;
 //use Illuminate\Support\Facades\Auth as Auth1;
@@ -25,8 +25,10 @@ class EmpresasController extends Controller
 
     public function getDatos(Request $request)
     {
-        $id_empresa = $request->user()->empresa_id;
-        return Empresa::with('configuracionPago')->with('arl')->with('banco')->find($id_empresa);
+
+        //return $request->all();
+        //$id_empresa = $request->user()->empresa_id;
+        return Empresa::with('configuracionPago')->with('arl')->with('banco')->find(1);
     }
 
     public function getGlobal()

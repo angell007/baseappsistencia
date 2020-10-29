@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pension;
+use App\Models\Pension;
 
 class PensionesController extends Controller
 {

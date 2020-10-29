@@ -69,7 +69,7 @@ export default {
     },
     postEps() {
       axios
-        .post('/api/eps/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/eps/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarFormulario()
@@ -83,7 +83,7 @@ export default {
 
     putEps() {
       axios
-        .put(`/api/eps/${this.lista.id}/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/eps/${this.lista.id}/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarFormulario()

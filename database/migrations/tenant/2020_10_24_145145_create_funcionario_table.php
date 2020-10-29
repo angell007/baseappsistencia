@@ -15,7 +15,8 @@ class CreateFuncionarioTable extends Migration
     {
         Schema::create('funcionario', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('identidad')->unique();
+            $table->integer('identidad')->unique()->default(0);
+            $table->string('dv');
             $table->string('nombres');
             $table->string('apellidos');
             $table->boolean('liquidado')->default(0);
@@ -57,7 +58,6 @@ class CreateFuncionarioTable extends Migration
             $table->integer('empresa_id')->nullable();
         });
     }
-
     /**
      * Reverse the migrations.
      *

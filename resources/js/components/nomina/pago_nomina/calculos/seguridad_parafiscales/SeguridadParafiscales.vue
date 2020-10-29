@@ -59,7 +59,7 @@ export default {
   methods: {
     async getRetencionesDatos() {
       let datos = await axios.get(
-        `/api/nomina/retenciones/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/retenciones/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
@@ -67,7 +67,7 @@ export default {
     },
     async getSeguridadDatos() {
       let datos = await axios.get(
-        `/api/nomina/seguridad/funcionarios/${this.funcionario.id}/${
+        `/api/${localStorage.getItem('tenant')}/nomina/seguridad/funcionarios/${this.funcionario.id}/${
           this.fechaInicio
         }/${this.fechaFin}`
       )
@@ -75,7 +75,7 @@ export default {
     },
     async getPorcentajesDatos() {
       let datos = await axios.get(
-        `/api/parametrizacion/nomina/ssocial_empresa/porcentajes/${
+        `/api/${localStorage.getItem('tenant')}/parametrizacion/nomina/ssocial_empresa/porcentajes/${
           this.funcionario.id
         }`
       )

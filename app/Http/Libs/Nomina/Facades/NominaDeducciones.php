@@ -5,8 +5,8 @@ namespace App\Http\Libs\Nomina\Facades;
 use App\Http\Libs\Nomina\Calculos\CalculoDeducciones;
 use App\Http\Libs\Nomina\PeriodoPago;
 
-use App\Funcionario;
-use App\Deduccion;
+use App\Models\Funcionario;
+use App\Models\Deduccion;
 
 class NominaDeducciones extends PeriodoPago
 {

@@ -125,7 +125,7 @@ export default {
   },
   methods: {
     getArlDatos() {
-      axios.get('/api/arl/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/arl/datos`).then(datos => {
         this.arlDatos = datos.data
 
         this.asignarObjetoArl(this.empresaEditar.arl_id)
@@ -145,7 +145,7 @@ export default {
       this.empresaEditar.arl_id = this.objetoArl.id
       axios
         .patch(
-          `/api/general/empresa/${this.empresaEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/general/empresa/${this.empresaEditar.id}/editar`,
           this.empresaEditar
         )
         .then(respuesta => {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\IngresoNoPrestacional;
-use App\Funcionario;
+use App\Models\IngresoNoPrestacional;
+use App\Models\Funcionario;
 
 class IngresosNPController extends Controller
 {

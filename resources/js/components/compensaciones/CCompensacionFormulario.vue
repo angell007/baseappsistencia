@@ -71,7 +71,7 @@ export default {
 
     postCompensacion() {
       axios
-        .post('/api/compensaciones/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/compensaciones/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()
@@ -85,7 +85,7 @@ export default {
 
     putCompensacion() {
       axios
-        .put(`/api/compensaciones/${this.lista.id}/editar`, this.$data.lista)
+        .put(`/api/${localStorage.getItem('tenant')}/compensaciones/${this.lista.id}/editar`, this.$data.lista)
         .then(respuesta => {
           this.$emit('recargar')
           this.limpiarDatos()

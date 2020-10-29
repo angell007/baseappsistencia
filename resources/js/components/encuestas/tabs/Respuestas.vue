@@ -83,7 +83,7 @@ export default {
     methods: {
         cargarRespuestas(fechaInicio, fechaFin) {
         axios
-            .get(`/api/encuestas/respuestas/${this.encuesta}/${fechaInicio}/${fechaFin}`)
+            .get(`/api/${localStorage.getItem('tenant')}/encuestas/respuestas/${this.encuesta}/${fechaInicio}/${fechaFin}`)
             .then(datos => {
                 this.Respuestas = datos.data
             })

@@ -232,7 +232,7 @@ export default {
 
       axios
         .post(
-          `/api/funcionarios/${this.funcionarioEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/editar`,
           data
         )
         .then(respuesta => {
@@ -260,7 +260,7 @@ export default {
       }
     },
     getTiposContrato() {
-      axios.get('/api/contratos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/contratos/datos`).then(datos => {
         this.contratosDatos = datos.data
         this.getContratoFuncionario()
       })

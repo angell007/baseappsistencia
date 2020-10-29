@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     getDeducciones() {
-      axios.get('/api/deducciones').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/api/deducciones`).then(datos => {
         this.deduccionesDatos = datos.data
         this.lista.contable_deduccion_id = this.deduccionesDatos[0].id
         this.getDatosDeducciones()
@@ -98,7 +98,7 @@ export default {
     },
     getDatosDeducciones() {
       axios
-        .get(`/api/deducciones/funcionarios/${this.funcionarioProp.id}`)
+        .get(`/api/${localStorage.getItem('tenant')}/deducciones/funcionarios/${this.funcionarioProp.id}`)
         .then(datos => {
           this.deduccionesFuncionarioDatos = datos.data
           this.mostrarForma = true
@@ -120,7 +120,7 @@ export default {
       this.lista['funcionario_id'] = this.funcionarioProp.id
       //return console.log(this.lista)
       axios
-        .post('/api/deducciones/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/deducciones/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('cerrar', respuesta.data)
           setTimeout(() => {
@@ -142,7 +142,7 @@ export default {
         })
         .then(resultado => {
           if (resultado.value) {
-            axios.delete(`/api/deducciones/${id}/eliminar`).then(respuesta => {
+            axios.delete(`/api/${localStorage.getItem('tenant')}/deducciones/${id}/eliminar`).then(respuesta => {
               this.$swal.fire('Eliminada', respuesta.data.message, 'success')
               this.getDatosDeducciones()
             })

@@ -2,8 +2,8 @@
 
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
-use App\Empresa;
+use App\Models\Funcionario;
+use App\Models\Empresa;
 
 use App\Http\Libs\Nomina\Calculos\CalculoRetenciones;
 use App\Http\Libs\Nomina\PeriodoPago;

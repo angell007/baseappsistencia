@@ -148,7 +148,7 @@ export default {
       ).format('HH:mm:ss')
       axios
         .patch(
-          `/api/general/empresa/${this.empresaEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/general/empresa/${this.empresaEditar.id}/editar`,
           this.empresaEditar
         )
         .then(respuesta => {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\HorarioTurnoFijo;
+use App\Models\HorarioTurnoFijo;
 
 class HorarioTurnosFijosController extends Controller
 {

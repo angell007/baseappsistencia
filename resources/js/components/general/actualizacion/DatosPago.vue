@@ -117,7 +117,7 @@ export default {
       })
     },
     getBancosDatos() {
-      axios.get('/api/bancos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/bancos/datos`).then(datos => {
         this.bancosDatos = datos.data
         this.asignarObjetoBanco(this.empresaEditar.banco_id)
       })
@@ -127,7 +127,7 @@ export default {
       this.empresaEditar.banco.nombre = this.objetoBanco.nombre
       axios
         .patch(
-          `/api/general/empresa/${this.empresaEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/general/empresa/${this.empresaEditar.id}/editar`,
           this.empresaEditar
         )
         .then(respuesta => {

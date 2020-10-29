@@ -73,7 +73,7 @@ export default {
     guardarIngreso() {
       axios
         .put(
-          `/api/parametrizacion/ingresos/${this.datos.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/parametrizacion/ingresos/${this.datos.id}/editar`,
           this.datos
         )
         .then(respuesta => {

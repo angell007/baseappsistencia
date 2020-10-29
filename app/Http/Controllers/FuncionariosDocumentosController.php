@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Funcionario;
-use App\FuncionarioDocumento;
+use App\Models\Funcionario;
+use App\Models\FuncionarioDocumento;
 
 class FuncionariosDocumentosController extends Controller
 {

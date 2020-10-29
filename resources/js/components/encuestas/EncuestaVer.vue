@@ -89,7 +89,7 @@ export default {
     },
     methods: {
         obtenerEncuesta(id){
-            axios.get(`/api/encuestas/${id}/mostrar`).then(datos => {
+            axios.get(`/api/${localStorage.getItem('tenant')}/encuestas/${id}/mostrar`).then(datos => {
                 this.encuesta = datos.data;
             })
         },

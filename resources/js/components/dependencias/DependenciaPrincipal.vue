@@ -126,7 +126,7 @@ export default {
     },
 
     cargarDependencias() {
-      axios.get('/api/dependencias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/dependencias/datos`).then(datos => {
         this.dependenciasDatos = this.dependenciasDatosBuscador = datos.data
       })
     },
@@ -154,7 +154,7 @@ export default {
         })
         .then(resultado => {
           if (resultado.value) {
-            axios.delete(`/api/dependencias/${id}/eliminar`).then(respuesta => {
+            axios.delete(`/api/${localStorage.getItem('tenant')}/dependencias/${id}/eliminar`).then(respuesta => {
               this.cargarDependencias()
               this.$swal.fire('Correcto!', respuesta.data.message, 'success')
             })

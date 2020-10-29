@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PagoNomina;
+use App\Models\PagoNomina;
 
 class HistorialPagosController extends Controller
 {

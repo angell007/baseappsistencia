@@ -98,13 +98,14 @@ export default {
       axios
         .post('/api/auth/login', this.$data.formulario)
         .then(datos => {
-        console.log(datos.data);
           localStorage.setItem('token', datos.data.token)
-          localStorage.setItem('tenant', datos.data.User['empresa_name'])
+          localStorage.setItem('usuario', JSON.stringify(datos.data.User)); 
+          localStorage.setItem('tenant', datos.data.ruta)
           eventEmitter.$emit('autenticado')
           this.$router.push('/tablero')
         })
         .catch(error => {
+          console.log(error);
           if (error.response.status == 401) {
             this.$notify({
               group: 'notificaciones',

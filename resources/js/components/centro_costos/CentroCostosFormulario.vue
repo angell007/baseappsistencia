@@ -81,7 +81,7 @@ export default {
     guardarCentroCostos() {
       if (!this.lista.id) {
         axios
-          .post('/api/centros_costos/crear', this.$data.lista)
+          .post(`/api/${localStorage.getItem('tenant')}/centros_costos/crear`, this.$data.lista)
           .then(respuesta => {
             this.$emit('recargar')
             this.limpiarFormulario()
@@ -97,7 +97,7 @@ export default {
           })
       } else {
         axios
-          .put(`/api/centros_costos/${this.lista.id}/editar`, this.$data.lista)
+          .put(`/api/${localStorage.getItem('tenant')}/centros_costos/${this.lista.id}/editar`, this.$data.lista)
           .then(respuesta => {
             this.$emit('recargar')
             this.limpiarFormulario()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -44,8 +44,10 @@ class Admin extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function empresa()
+
+
+    public function cliente()
     {
-        return $this->hasOne('App\Empresa','id', 'empresa_id');
+        return $this->belongsTo(Cliente::class,"cliente_id");
     }
 }

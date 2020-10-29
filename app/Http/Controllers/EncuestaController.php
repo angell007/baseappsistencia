@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Encuesta;
-use App\EncuestaPregunta;
-use App\EncuestaFuncionario;
-use App\EncuestaFuncionarioRespuesta;
-use App\EncuestaPreguntaOpcion;
+use App\Models\Encuesta;
+use App\Models\EncuestaPregunta;
+use App\Models\EncuestaFuncionario;
+use App\Models\EncuestaFuncionarioRespuesta;
+use App\Models\EncuestaPreguntaOpcion;
 //use Auth;
 //use Illuminate\Support\Facades\Auth as Auth1;
 

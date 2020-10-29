@@ -29,7 +29,7 @@ export default {
   methods: {
     cargarDatosGrafica(fechaInicio, fechaFin) {
       axios
-        .get(`/api/llegadas_tarde/fecha/${fechaInicio}/${fechaFin}`)
+        .get(`/api/${localStorage.getItem('tenant')}/llegadas_tarde/fecha/${fechaInicio}/${fechaFin}`)
         .then(datos => {
           this.graficaDatos = datos.data
           this.crearGrafica()

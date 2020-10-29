@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
-use App\IngresoNoPrestacional;
-use App\IngresoPrestacional;
+use App\Models\Funcionario;
+use App\Models\IngresoNoPrestacional;
+use App\Models\IngresoPrestacional;
 
 use App\Http\Libs\Nomina\Calculos\CalculoIngresos;
 use App\Http\Libs\Nomina\PeriodoPago;

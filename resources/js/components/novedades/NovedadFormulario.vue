@@ -180,12 +180,12 @@ export default {
       )
     },
     cargarFuncionarios() {
-      axios.get('/api/novedades/funcionarios').then(funcionarios => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/novedades/funcionarios`).then(funcionarios => {
         this.funcionariosDatos = funcionarios.data
       })
     },
     cargarNovedades() {
-      axios.get('/api/novedades/nombres_novedades').then(novedades => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/novedades/nombres_novedades`).then(novedades => {
         this.nombresNovedadesDatos = novedades.data
       })
     },
@@ -209,7 +209,7 @@ export default {
     guardarNovedad() {
       if (!this.lista.id) {
         axios
-          .post('/api/novedades/crear', this.$data.lista)
+          .post(`/api/${localStorage.getItem('tenant')}/novedades/crear`, this.$data.lista)
           .then(respuesta => {
             this.guardadoDatosFin()
           })
@@ -218,7 +218,7 @@ export default {
           })
       } else {
         axios
-          .put(`/api/novedades/${this.lista.id}/editar`, this.$data.lista)
+          .put(`/api/${localStorage.getItem('tenant')}/novedades/${this.lista.id}/editar`, this.$data.lista)
           .then(respuesta => {
             this.guardadoDatosFin()
           })

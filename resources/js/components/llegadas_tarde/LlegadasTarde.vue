@@ -274,14 +274,14 @@ export default {
   created() {
     this.cargarLlegadasTarde(this.fecha_inicio, this.fecha_fin)
     this.cargarDatosReporteExcel(this.fecha_inicio, this.fecha_fin)
-    this.pdfUrl = `/api/llegadas_tarde/reporte_pdf/${this.fecha_inicio}/${
+    this.pdfUrl = `/api/${localStorage.getItem('tenant')}/llegadas_tarde/reporte_pdf/${this.fecha_inicio}/${
       this.fecha_fin
     }`
   },
   methods: {
     cargarLlegadasTarde(fechaInicio, fechaFin) {
       axios
-        .get(`/api/llegadas_tarde/datos/${fechaInicio}/${fechaFin}`)
+        .get(`/api/${localStorage.getItem('tenant')}/llegadas_tarde/datos/${fechaInicio}/${fechaFin}`)
         .then(datos => {
           this.llegadasTardeDatos = this.filtroLlegadasTardeDatos = datos.data
         })
@@ -289,7 +289,7 @@ export default {
 
     cargarDatosReporteExcel(fechaInicio, fechaFin) {
       axios
-        .get(`/api/llegadas_tarde/reporte/${fechaInicio}/${fechaFin}`)
+        .get(`/api/${localStorage.getItem('tenant')}/llegadas_tarde/reporte/${fechaInicio}/${fechaFin}`)
         .then(datos => {
           //this.reportesExcelDatos = datos.data
           this.reportesExcelDatos = this.formatearDatosReportes(
@@ -318,7 +318,7 @@ export default {
 
     descargarReportePdf(fechaInicio, fechaFin) {
       axios
-        .post(`/api/llegadas_tarde/reporte_pdf/${fechaInicio}/${fechaFin}`)
+        .post(`/api/${localStorage.getItem('tenant')}/llegadas_tarde/reporte_pdf/${fechaInicio}/${fechaFin}`)
         .then(respuesta => {
           window.open('data:application/pdf,' + encodeURI(respuesta.data))
         })
@@ -445,7 +445,7 @@ export default {
         this.cargarLlegadasTarde(fechaInicio, fechaFin)
         this.cargarDatosReporteExcel(fechaInicio, fechaFin)
         this.$refs.grafica.cargarDatosGrafica(fechaInicio, fechaFin)
-        this.pdfUrl = `/api/llegadas_tarde/reporte_pdf/${this.fecha_inicio}/${
+        this.pdfUrl = `/api/${localStorage.getItem('tenant')}/llegadas_tarde/reporte_pdf/${this.fecha_inicio}/${
           this.fecha_fin
         }`
       }

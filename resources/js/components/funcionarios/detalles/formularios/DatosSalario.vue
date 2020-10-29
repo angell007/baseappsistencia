@@ -33,7 +33,7 @@ export default {
         if (resultado.value) {
           axios
             .post(
-              `/api/funcionarios/${this.funcionarioEditar.id}/editar`,
+              `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/editar`,
               this.funcionarioEditar
             )
             .then(respuesta => {

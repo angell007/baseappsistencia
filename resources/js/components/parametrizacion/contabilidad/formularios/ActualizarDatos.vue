@@ -68,7 +68,7 @@ export default {
         contrapartida: '',
         estado: true,
       },
-      baseUrl: '/api/parametrizacion/',
+      baseUrl: `/api/${localStorage.getItem('tenant')}/parametrizacion/`,
       mostrarCampoConcepto: false,
     }
   },

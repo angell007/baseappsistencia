@@ -2,7 +2,7 @@
 
 namespace App\Http\Libs\Nomina\Facades;
 
-use App\Funcionario;
+use App\Models\Funcionario;
 
 use App\Http\Libs\Nomina\Calculos\ResumenPago;
 use App\Http\Libs\Nomina\PeriodoPago;

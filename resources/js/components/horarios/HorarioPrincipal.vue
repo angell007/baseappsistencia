@@ -121,8 +121,8 @@ export default {
     getAllData() {
       axios
         .all([
-          axios(`/api/horarios/datos/generales/${this.numeroSemana}`),
-          axios('/api/turnos/rotativos/datos'),
+          axios(`/api/${localStorage.getItem('tenant')}/horarios/datos/generales/${this.numeroSemana}`),
+          axios(`/api/${localStorage.getItem('tenant')}/turnos/rotativos/datos`),
         ])
         .then(
           axios.spread((datosGenerales, turnos) => {
@@ -145,7 +145,7 @@ export default {
     },
 
     postHorario(horario) {
-      axios.post('/api/horario/turno_rotativo/crear', horario)
+      axios.post(`/api/${localStorage.getItem('tenant')}/horario/turno_rotativo/crear`, horario)
     },
 
     makeRequestBySemana(semana) {

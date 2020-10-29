@@ -292,7 +292,7 @@ export default {
       }
     },
     getJefes() {
-      axios.get('/api/jefes').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/jefes`).then(datos => {
         this.jefesDatos = datos.data
         this.existenJefes()
       })
@@ -301,12 +301,12 @@ export default {
       this.noExistenJefes = this.jefesDatos.length === 0 ? true : false
     },
     getCentrosCostos() {
-      axios.get('/api/centros_costos/dependencias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/centros_costos/dependencias/datos`).then(datos => {
         this.centrosCostosDatos = datos.data
       })
     },
     getTurnosFijos(){
-       axios.get('/api/turnos/fijos/datos').then(datos => {
+       axios.get(`/api/${localStorage.getItem('tenant')}/turnos/fijos/datos`).then(datos => {
         this.turnosFijosDatos = datos.data
       })
     },
@@ -331,7 +331,7 @@ export default {
     },
 
     getContratos() {
-      axios.get('/api/contratos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/contratos/datos`).then(datos => {
         this.contratosDatos = datos.data
       })
     },

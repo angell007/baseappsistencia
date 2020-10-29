@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CentroCosto;
+use App\Models\CentroCosto;
 
 class CentroCostosController extends Controller
 {

@@ -200,7 +200,7 @@ export default {
     },
     getHorasExtrasRotativos() {
       return axios.get(
-        `/api/horas_extras/turno_rotativo/${this.primerDiaSemana}/${
+        `/api/${localStorage.getItem('tenant')}/horas_extras/turno_rotativo/${this.primerDiaSemana}/${
           this.ultimoDiaSemana
         }`
       )
@@ -208,7 +208,7 @@ export default {
 
     getHorasExtrasFijos() {
       return axios.get(
-        `/api/horas_extras/turno_fijo/${this.primerDiaSemana}/${
+        `/api/${localStorage.getItem('tenant')}/horas_extras/turno_fijo/${this.primerDiaSemana}/${
           this.ultimoDiaSemana
         }`
       )

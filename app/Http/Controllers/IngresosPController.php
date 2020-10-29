@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\IngresoPrestacional;
-use App\Funcionario;
+use App\Models\IngresoPrestacional;
+use App\Models\Funcionario;
 
 class IngresosPController extends Controller
 {

@@ -64,7 +64,7 @@ export default {
             var img = canvas.toDataURL("image/png");
             this.video.pause();
             this.CambiaVista();
-            axios.post('/api/asistencia/validar', { imagen : img })
+            axios.post(`/api/${localStorage.getItem('tenant')}/asistencia/validar`, { imagen : img })
                 .then(respuesta => {
                     this.CambiaVista();
                     this.$swal.fire(respuesta.data);

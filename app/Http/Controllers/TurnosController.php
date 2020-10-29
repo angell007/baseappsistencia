@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\TurnoRotativo;
-use App\TurnoFijo;
+use App\Models\TurnoRotativo;
+use App\Models\TurnoFijo;
 
 class TurnosController extends Controller
 {

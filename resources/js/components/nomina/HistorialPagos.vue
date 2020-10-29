@@ -64,7 +64,7 @@ export default {
 
   methods: {
     getHistorialPagos() {
-      axios.get('/api/nomina/historial_pagos/nomina').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/nomina/historial_pagos/nomina`).then(datos => {
         this.historialPagos = datos.data
         this.renderizar = true
       })

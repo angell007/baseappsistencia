@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     getIngresosNPrestacionales() {
-      axios.get('/api/nomina/pago/ingresos_no_prestacionales').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/nomina/pago/ingresos_no_prestacionales`).then(datos => {
         this.ingresosNPDatos = datos.data
         this.lista.contable_ingreso_id = this.ingresosNPDatos[0].id
         this.getDatosIngresosNP()
@@ -97,7 +97,7 @@ export default {
     getDatosIngresosNP() {
       axios
         .get(
-          `/api/ingresos_no_prestacionales/funcionarios/${
+          `/api/${localStorage.getItem('tenant')}/ingresos_no_prestacionales/funcionarios/${
             this.funcionarioProp.id
           }`
         )
@@ -121,7 +121,7 @@ export default {
     postIngresoNoPrestacional() {
       this.lista['funcionario_id'] = this.funcionarioProp.id
       axios
-        .post('/api/ingresos_no_prestacionales/crear', this.$data.lista)
+        .post(`/api/${localStorage.getItem('tenant')}/ingresos_no_prestacionales/crear`, this.$data.lista)
         .then(respuesta => {
           this.$emit('cerrar', respuesta.data)
           setTimeout(() => {
@@ -153,7 +153,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/ingresos_no_prestacionales/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/ingresos_no_prestacionales/${id}/eliminar`)
               .then(respuesta => {
                 this.$swal.fire('Eliminado', respuesta.data.message, 'success')
                 this.getDatosIngresosNP()

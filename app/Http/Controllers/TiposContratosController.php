@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TipoContrato;
+use App\Models\TipoContrato;
 
 class TiposContratosController extends Controller
 {

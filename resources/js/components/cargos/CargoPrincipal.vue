@@ -117,7 +117,7 @@ export default {
     },
 
     cargarCargos() {
-      axios.get('/api/cargos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/cargos/datos`).then(datos => {
         this.cargosDatos = this.cargosDatosBuscador = datos.data
       })
     },
@@ -146,7 +146,7 @@ export default {
         .then(resultado => {
           if (resultado.value) {
             axios
-              .delete(`/api/cargos/${id}/eliminar`)
+              .delete(`/api/${localStorage.getItem('tenant')}/cargos/${id}/eliminar`)
               .then(respuesta => {
                 this.cargarCargos()
                 this.$swal.fire('Correcto!', respuesta.data.message, 'success')

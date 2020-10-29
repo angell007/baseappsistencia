@@ -5,8 +5,8 @@ namespace App\Http\Libs\Nomina\Facades;
 use App\Http\Libs\Nomina\PeriodoPago;
 use App\Http\Libs\Nomina\Calculos\CalculoNovedades;
 
-use App\Funcionario;
-use App\Novedad;
+use App\Models\Funcionario;
+use App\Models\Novedad;
 
 /**
  * Facade para el cálculo de las novedades de un x funcionario en un determinado periodo de pago

@@ -164,22 +164,22 @@ export default {
       }
     },
     getEps() {
-      axios.get('/api/eps/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/eps/datos`).then(datos => {
         this.epsDatos = datos.data
       })
     },
     getCesantias() {
-      axios.get('/api/cesantias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/cesantias/datos`).then(datos => {
         this.cesantiasDatos = datos.data
       })
     },
     getPensiones() {
-      axios.get('/api/pensiones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/pensiones/datos`).then(datos => {
         this.pensionesDatos = datos.data
       })
     },
     getCompensaciones() {
-      axios.get('/api/compensaciones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/compensaciones/datos`).then(datos => {
         this.compensacionesDatos = datos.data
       })
     },

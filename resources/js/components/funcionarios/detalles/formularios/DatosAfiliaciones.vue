@@ -152,7 +152,7 @@ export default {
       delete this.funcionarioEditar["image"];
       axios
         .post(
-          `/api/funcionarios/${this.funcionarioEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/editar`,
           this.funcionarioEditar
         )
         .then(respuesta => {
@@ -173,7 +173,7 @@ export default {
     },
 
     cargarCesantias() {
-      axios.get('/api/cesantias/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/cesantias/datos`).then(datos => {
         this.cesantiasDatos = datos.data
         this.cesantiasActual = this.getDatoActual(
           this.cesantiasDatos,
@@ -183,13 +183,13 @@ export default {
     },
 
     cargarEps() {
-      axios.get('/api/eps/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/eps/datos`).then(datos => {
         this.epsDatos = datos.data
         this.epsActual = this.getDatoActual(this.epsDatos, 'eps_id')
       })
     },
     cargarPensiones() {
-      axios.get('/api/pensiones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/pensiones/datos`).then(datos => {
         this.pensionesDatos = datos.data
         this.pensionesActual = this.getDatoActual(
           this.pensionesDatos,
@@ -198,7 +198,7 @@ export default {
       })
     },
     cargarCompensaciones() {
-      axios.get('/api/compensaciones/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/compensaciones/datos`).then(datos => {
         this.compensacionesDatos = datos.data
         this.compensacionActual = this.getDatoActual(
           this.compensacionesDatos,

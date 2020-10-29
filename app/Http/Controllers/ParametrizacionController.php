@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\ContableSalarioSubsidioTransporte;
-use App\ContableIngreso;
-use App\ContableLicenciaIncapacidad;
-use App\ContableDeduccion;
-use App\ContablePrestacionSocial;
-use App\ContableSeguridadSocial;
-use App\ContableLiquidacion;
-use App\ContableBancoCaja;
+use App\Models\ContableSalarioSubsidioTransporte;
+use App\Models\ContableIngreso;
+use App\Models\ContableLicenciaIncapacidad;
+use App\Models\ContableDeduccion;
+use App\Models\ContablePrestacionSocial;
+use App\Models\ContableSeguridadSocial;
+use App\Models\ContableLiquidacion;
+use App\Models\ContableBancoCaja;
 
 class ParametrizacionController extends Controller
 {

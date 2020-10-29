@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Deduccion;
-use App\Funcionario;
-use App\ContableDeduccion;
+use App\Models\Deduccion;
+use App\Models\Funcionario;
+use App\Models\ContableDeduccion;
 
 class DeduccionesController extends Controller
 {

@@ -114,7 +114,7 @@ export default {
       delete this.funcionarioEditar["image"];
       axios
         .post(
-          `/api/funcionarios/${this.funcionarioEditar.id}/editar`,
+          `/api/${localStorage.getItem('tenant')}/funcionarios/${this.funcionarioEditar.id}/editar`,
           this.funcionarioEditar
         )
         .then(respuesta => {
@@ -134,7 +134,7 @@ export default {
         })
     },
     getDependencias() {
-      axios.get('/api/dependencias/cargos/datos').then(datos => {
+      axios.get(`/api/${localStorage.getItem('tenant')}/dependencias/cargos/datos`).then(datos => {
         this.dependenciasDatos = datos.data
         this.dependenciaActual = this.getDependenciaAndCargoActual(
           this.dependenciasDatos,
