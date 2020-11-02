@@ -43,7 +43,8 @@ class AsistenciaController extends Controller
         $ocpApimSubscriptionKey = '1f2a8e35f210434bb655212545802b5b';
         $azure_grupo = 'personalclinica2020';
         $uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0';
-        $imageUrl = str_replace("/home/geneticapp/","https://",storage_path()).'/temporales/' . $png_url;
+        //$imageUrl = str_replace("/home/geneticapp/","https://",storage_path()).'/temporales/' . $png_url;
+        $imageUrl ='https://app.geneticapp.co/back/storage/tenantfd91ae10e8ce27d51b5401655bd53c53/app/funcionarios/1604284680.luis.jpg';
 
         $request2 = new \Http_Request2($uriBase . '/detect');
         $url = $request2->getUrl();
@@ -211,7 +212,7 @@ class AsistenciaController extends Controller
         }
     }
     private function ValidaTurnoFijo($func,$hoy,$hactual){
-        $ruta=str_replace("/home/geneticapp/","https://",storage_path());
+        $ruta=str_replace("/home/geneticapp/","https://",storage_path()).'/';
         /** VALIDACION DE TURNO FIJO ASIGNADO AL FUNCIONARIO */
         //var_dump($func->diariosTurnoFijo);
         if(count($func->diariosTurnoFijo)==0){
@@ -259,7 +260,7 @@ class AsistenciaController extends Controller
                 if($diff<=$tol_ent){
                     $obj = new \stdClass();
                     $obj->nombre = $func->nombres." ".$func->apellidos;
-                    $obj->imagen = $ruta.$func->image;
+                    $obj->imagen = $ruta.'app/'.$func->image;
                     $obj->tipo = 'ingreso';
                     $obj->hora = date("d/m/Y H:i:s",strtotime($hoy." ".$hactual));
                     $obj->ubicacion = 'entrada';
@@ -274,6 +275,16 @@ class AsistenciaController extends Controller
                     );
                     return $respuesta;
                 }else{
+                    $obj = new \stdClass();
+                    $obj->nombre = $func->nombres." ".$func->apellidos;
+                    $obj->imagen = $ruta.'app/'.$func->image;
+                    $obj->tipo = 'ingreso';
+                    $obj->hora = date("d/m/Y H:i:s",strtotime($hoy." ".$hactual));
+                    $obj->ubicacion = 'entrada';
+                    $obj->destino = $func->email;
+            
+                    Mail::to($func->email)->send(new Correo($obj));
+                    
                     /** GUARDO LA LLEGADA TARDE */
                     $datos_llegada = array(
                         'funcionario_id' => $func->id,

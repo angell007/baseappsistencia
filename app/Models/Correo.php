@@ -37,6 +37,7 @@ class Correo extends Mailable
     {
         return $this->from($this->correo->destino)
                     ->view('mails.asistencia')
+                    ->subject("Registro de Marcación Asistencia - GeneticApp")
                     ->text('mails.asistencia_plano');
                     
     }

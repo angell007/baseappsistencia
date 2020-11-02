@@ -42,6 +42,7 @@ class FuncionariosController extends Controller
             $imagen = request('image');
             $nombre = time() . '.' . $imagen->getClientOriginalName();
             $ruta = $imagen->storeAs('funcionarios', $nombre, 'public');
+            return $ruta;
         }
 
         try {
@@ -95,96 +96,96 @@ class FuncionariosController extends Controller
         $atributos["liquidado"]=0;
         $atributos['image'] = $ruta;
 
-        // if($ruta!=''){
-        //     //detectionModel detection_02
+        if($ruta!=''){
+            //detectionModel detection_02
 
 
-        //     /** CREA EL FUNCIONARIO EN MICROSOFT AZURE */
-        //     $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/persons');
-        //     $url = $request->getUrl();
-        //     $headers = array(
-        //         'Content-Type' => 'application/json',
-        //         'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
-        //     );
-        //     $request->setHeader($headers);
-        //     $parameters = array(
-        //     );
-        //     $body = array(
-        //         "name"=>$atributos["nombres"]." ".$atributos["apellidos"],
-        //         "userData"=>$atributos["identidad"]
-        //     );
-        //     $url->setQueryVariables($parameters);
-        //     $request->setMethod(\HTTP_Request2::METHOD_POST);
-        //     $request->setBody(json_encode($body));
-        //     try{
-        //         $response = $request->send();
-        //         $resp=$response->getBody();
-        //         $resp=json_decode($resp);
-        //         $person_id=$resp->personId;
+            /** CREA EL FUNCIONARIO EN MICROSOFT AZURE */
+            $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/persons');
+            $url = $request->getUrl();
+            $headers = array(
+                'Content-Type' => 'application/json',
+                'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
+            );
+            $request->setHeader($headers);
+            $parameters = array(
+            );
+            $body = array(
+                "name"=>$atributos["nombres"]." ".$atributos["apellidos"],
+                "userData"=>$atributos["identidad"]
+            );
+            $url->setQueryVariables($parameters);
+            $request->setMethod(\HTTP_Request2::METHOD_POST);
+            $request->setBody(json_encode($body));
+            try{
+                $response = $request->send();
+                $resp=$response->getBody();
+                $resp=json_decode($resp);
+                $person_id=$resp->personId;
 
-        //         $atributos["personId"]=$person_id;
+                $atributos["personId"]=$person_id;
 
-        //     }catch (HttpException $ex){
-        //         echo "error: ".$ex;
-        //     }
+            }catch (HttpException $ex){
+                echo "error: ".$ex;
+            }
 
-        //     /** CREA LOS PUNTOS FACIALES PROPIOS DEL FUNCIONARIO */
-        //     $ruta_guardada='https://app.geneticapp.co/back/storage/app/public/'.$ruta;
-        //     //$ruta_guardada='https://app.geneticapp.co/back/storage/app/public/funcionarios/1591186701.foto1.jpg';
+            /** CREA LOS PUNTOS FACIALES PROPIOS DEL FUNCIONARIO */
+            $ruta_guardada='https://app.geneticapp.co/back/storage/app/public/'.$ruta;
+            //$ruta_guardada='https://app.geneticapp.co/back/storage/app/public/funcionarios/1591186701.foto1.jpg';
 
-        //     $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/persons/'.$person_id.'/persistedFaces');
-        //     $url = $request->getUrl();
+            $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/persons/'.$person_id.'/persistedFaces');
+            $url = $request->getUrl();
 
-        //     $headers = array(
-        //         'Content-Type' => 'application/json',
-        //         'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
-        //     );
+            $headers = array(
+                'Content-Type' => 'application/json',
+                'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
+            );
 
-        //     $request->setHeader($headers);
-        //     $parameters = array(
-        //         "detectionModel"=>"detection_02"
-        //     );
-        //     $body=array(
-        //         "url"=>$ruta_guardada
-        //     );
-        //     $url->setQueryVariables($parameters);
-        //     $request->setMethod(\HTTP_Request2::METHOD_POST);
-        //     $request->setBody(json_encode($body));
-        //     try{
-        //         $response = $request->send();
-        //         $resp=$response->getBody();
-        //         $resp=json_decode($resp);
-        //         $persistedFaceId=$resp->persistedFaceId;
+            $request->setHeader($headers);
+            $parameters = array(
+                "detectionModel"=>"detection_02"
+            );
+            $body=array(
+                "url"=>$ruta_guardada
+            );
+            $url->setQueryVariables($parameters);
+            $request->setMethod(\HTTP_Request2::METHOD_POST);
+            $request->setBody(json_encode($body));
+            try{
+                $response = $request->send();
+                $resp=$response->getBody();
+                $resp=json_decode($resp);
+                $persistedFaceId=$resp->persistedFaceId;
 
-        //         $atributos["persistedFaceId"]=$persistedFaceId;
+                $atributos["persistedFaceId"]=$persistedFaceId;
 
-        //     }catch (HttpException $ex){
-        //         echo $ex;
-        //     }
+            }catch (HttpException $ex){
+                echo $ex;
+            }
 
-        //     /** ENTRENA EL GRUPO PARA QUE IDENTIICQUE EL ROSTRO */
+            /** ENTRENA EL GRUPO PARA QUE IDENTIICQUE EL ROSTRO */
 
-        //     $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/train');
-        //     $url = $request->getUrl();
+            $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/train');
+            $url = $request->getUrl();
 
-        //     $headers = array(
-        //         'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
-        //     );
-        //     $request->setHeader($headers);
-        //     $parameters = array(
+            $headers = array(
+                'Ocp-Apim-Subscription-Key' => $this->ocpApimSubscriptionKey,
+            );
+            $request->setHeader($headers);
+            $parameters = array(
 
-        //     );
-        //     $url->setQueryVariables($parameters);
-        //     $request->setMethod(\HTTP_Request2::METHOD_POST);
-        //     $request->setBody("");
-        //     try{
-        //         $response = $request->send();
-        //         echo $response->getBody();
-        //     }catch (HttpException $ex){
-        //         echo $ex;
-        //     }
+            );
+            $url->setQueryVariables($parameters);
+            $request->setMethod(\HTTP_Request2::METHOD_POST);
+            $request->setBody("");
+            try{
+                $response = $request->send();
+                echo $response->getBody();
+            }catch (HttpException $ex){
+                echo $ex;
+            }
 
-        // }
+        }
 
         Funcionario::create($atributos);
 
@@ -239,7 +240,7 @@ class FuncionariosController extends Controller
         if (request()->hasFile('image')) {
             $imagen = request('image');
             $nombre = time() . '.' . $imagen->getClientOriginalName();
-            $ruta = $imagen->storeAs('funcionarios', $nombre, 'public');
+            $ruta = $imagen->storeAs('funcionarios', $nombre);
         }
 
         $atributos = request()->validate([
@@ -336,7 +337,7 @@ class FuncionariosController extends Controller
             }
 
             /** CREA LOS PUNTOS FACIALES PROPIOS DEL FUNCIONARIO */
-            $ruta_guardada='https://app.geneticapp.co/back/storage/app/public/'.$ruta;
+            $ruta_guardada=str_replace("/home/geneticapp/","https://",storage_path()).'/app/'.$ruta;
             //$ruta_guardada='https://app.geneticapp.co/back/storage/app/public/funcionarios/1591186767.foto5.jpg';
 
             $request = new \Http_Request2($this->uriBase.'/persongroups/'.$this->azure_grupo.'/persons/'.$person_id.'/persistedFaces');
