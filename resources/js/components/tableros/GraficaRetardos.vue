@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="chartdiv" ref="chartdiv"  v-show="data_chart.length"></div>
       <p
-        class="font-weight-bold text-center"
+        class="text-center"
         v-show="!data_chart.length"
       >No existen llegadas tardes en el periodo actual.</p>
     </div>
@@ -72,20 +72,20 @@ export default {
       bullethover.properties.scale = 1.3
 
       // Make a panning cursor
-      chart.cursor = new am4charts.XYCursor()
+      /*chart.cursor = new am4charts.XYCursor()
       chart.cursor.behavior = 'panXY'
       chart.cursor.xAxis = dateAxis
-      chart.cursor.snapToSeries = series
+      chart.cursor.snapToSeries = series*/
 
       // Create vertical scrollbar and place it before the value axis
-      chart.scrollbarY = new am4core.Scrollbar()
+     /* chart.scrollbarY = new am4core.Scrollbar()
       chart.scrollbarY.parent = chart.leftAxesContainer
-      chart.scrollbarY.toBack()
+      chart.scrollbarY.toBack()*/
 
       // Create a horizontal scrollbar with previe and place it underneath the date axis
-      chart.scrollbarX = new am4charts.XYChartScrollbar()
+     /* chart.scrollbarX = new am4charts.XYChartScrollbar()
       chart.scrollbarX.series.push(series)
-      chart.scrollbarX.parent = chart.bottomAxesContainer
+      chart.scrollbarX.parent = chart.bottomAxesContainer*/
 
       this.chart = chart
     },
@@ -96,6 +96,6 @@ export default {
 <style scoped>
 .chartdiv {
   width: 100%;
-  height: 350px;
+  height: 250px;
 }
 </style>

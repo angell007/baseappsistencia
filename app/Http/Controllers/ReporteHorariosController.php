@@ -26,7 +26,7 @@ class ReporteHorariosController extends Controller
                 $query->select('id', 'dependencia_id', 'nombres', 'apellidos', 'image', 'tipo_turno')->where('tipo_turno', 'Rotativo')->whereHas('diariosTurnoRotativo', $filtroFecha)->with(['diariosTurnoRotativo' =>
                 function ($query) use ($fechaInicio, $fechafin) {
                     $query->select()->whereBetween('fecha', [$fechaInicio, $fechafin])->addSelect(
-                        DB::raw('IF(FORMAT((TIME_TO_SEC(hora_salida_uno) - TIME_TO_SEC(hora_entrada_uno))/3600,2)>=0,FORMAT((TIME_TO_SEC(hora_salida_uno) - TIME_TO_SEC(hora_entrada_uno))/3600,2),0) as cantidad_horas')
+                        DB::raw('TIMESTAMPDIFF(SECOND,CONCAT(fecha," ",hora_entrada_uno),CONCAT(fecha_salida," ",hora_salida_uno))/3600 as cantidad_horas')
                     );
                 }]);
             }]);

@@ -2,12 +2,12 @@
   <div class="container" v-if="renderizarTablero">
     <div class="row">
       <div class="col-12">
-        <h1>Tablero Principal</h1>
+        <h3>{{ Titulo }}</h3>
         <div class="separator mb-5"></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-9">
+      <div class="col-md-9">
         <div class="row icon-cards">
           <div class="col-12">
             <div class="row">
@@ -16,7 +16,7 @@
                     <div class="card-body text-center">
                         <i class="iconsmind-Timer-2"></i>
                         <p class="card-text mb-0">LLegadas Tarde</p>
-                        <p class="lead card-item-tablero text-center">{{Indicadores.Llegadas}}</p>
+                        <p class="lead card-item-tablero text-center mb-0">{{Indicadores.Llegadas}}</p>
                     </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="card-body text-center">
                         <i class="iconsmind-Bag-Coins"></i>
                         <p class="card-text mb-0">Novedades</p>
-                        <p class="lead card-item-tablero text-center">{{Indicadores.Novedades}}</p>
+                        <p class="lead card-item-tablero text-center mb-0">{{Indicadores.Novedades}}</p>
                     </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="card-body text-center">
                         <i class="iconsmind-Door"></i>
                         <p class="card-text mb-0">Renuncias</p>
-                        <p class="lead card-item-tablero text-center">{{Indicadores.Renuncias}}</p>
+                        <p class="lead card-item-tablero text-center mb-0">{{Indicadores.Renuncias}}</p>
                     </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="card-body text-center">
                         <i class="iconsmind-Conference"></i>
                         <p class="card-text mb-0">Nuevo personal</p>
-                        <p class="lead card-item-tablero text-center">{{Indicadores.Nuevos}}</p>
+                        <p class="lead card-item-tablero text-center mb-0">{{Indicadores.Nuevos}}</p>
                     </div>
                     </div>
                 </div>
@@ -54,30 +54,29 @@
           <div class="col-12">
             <div class="card">
               <div class="card-title pl-3 pt-3 mb-0">
-                <h3 class>
-                  Top llegadas tarde en el mes
-                  <img  src="img/cup-icon.svg" class="svg-icon"  alt="Top-imagen" />
-                </h3>
+                <h4 class>
+                  Top 5 llegadas tarde en el mes
+                  <!-- <img  src="img/cup-icon.svg" class="svg-icon"  alt="Top-imagen" /> -->
+                </h4>
               </div>
-              <div class="card-body d-flex justify-content-around align-items-center">
+              <div class="card-body d-flex justify-content-around align-items-center p-2">
                 <template v-if="topFuncionariosByRetardos.length">
                   <div
                     class="text-center"
                     v-for="(funcionario,index) in topFuncionariosByRetardos"
                     :key="index"
                   >
-                    <img
-                      class="img-funcionario"
-                      :src="`back/storage/app/public/${funcionario.image}`"
-                      alt="Imagen funcionario"
-                    />
+                    <img v-if="funcionario.image!=null" class="img-funcionario" :src="`back/storage/app/public/${funcionario.image}`"  alt="" />
+                    <img v-else :src="`/img/robot.jpg`" class="img-funcionario" alt="" >
                     <p class="mb-0">{{parsearNombreFuncionario(funcionario)}}</p>
                     <p>
-                      <small>Cantidad: {{funcionario.llegadas}}</small>
+                      <small>{{funcionario.llegadas}} Retraso<span v-if="funcionario.llegadas>1">s</span></small>
                     </p>
                   </div>
                 </template>
-                <p class v-else>No existen funcionarios aún con llegadas tarde.</p>
+                <p class v-else>
+                  <img src="/img/llegadas.png" class="img-fluid" alt="sin llegadas tarde" >
+                </p>
               </div>
             </div>
           </div>
@@ -87,14 +86,15 @@
             <h4 class>Llegadas tarde en este mes</h4>
           </grafica-retardos>
         </div>
+        <!-- 
         <div class="mt-4">
           <grafica-costos>
             <h5 class>Costos nómina</h5>
           </grafica-costos>
-        </div>
+        </div>  -->
       </div>
 
-      <div class="col-3">
+      <div class="col-md-3">
         <birthdays :funcionarios="birthdayFuncionarios"></birthdays>
         <contratos-por-vencer :funcionarios="contratosFuncionarios"></contratos-por-vencer>
       </div>
@@ -119,6 +119,7 @@ export default {
   },
   data() {
     return {
+      Titulo: '' ,
       renderizarTablero: false,
       topFuncionariosByRetardos: [],
       graficaRetardos: [],
@@ -133,10 +134,16 @@ export default {
     }
   },
   created() {
+    this.getTitulo()
     this.getAllDatos()
-    this.getEmpresaDatos()
+    //this.getEmpresaDatos()
   },
   methods: {
+    getTitulo(){
+      var usuario = JSON.parse(localStorage.getItem('usuario'));
+      
+      this.Titulo = "Bienvenido "+usuario["nombres"]+", ¡recuerda que hoy es un gran día para sonreir!"
+    },
     getAllDatos() {
       axios
         .all([
@@ -280,6 +287,7 @@ export default {
 .img-funcionario {
   width: 42px;
   border-radius: 50%;
+  border: 1px solid #ccc;
 }
 .svg-icon {
   width: 38px;

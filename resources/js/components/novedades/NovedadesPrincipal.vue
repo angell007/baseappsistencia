@@ -62,7 +62,8 @@
                   class="align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center"
                 >
                   <p class="w-40 w-xs-100 mb-0">
-                    <img :src="`/back/storage/app/public/${nov.funcionario.image}`" alt="Imagen funcionario">
+                    <img v-if="nov.funcionario.image!=null" :src="`/back/storage/app/public/${nov.funcionario.image}`" class="img-funcionario mr-1"  alt="">
+                    <img v-else :src="`/img/robot.jpg`" class="img-funcionario mr-1" alt="" >
                     <span
                       class="font-weight-bold"
                     >{{nov.funcionario.nombres}} {{nov.funcionario.apellidos}}</span>
@@ -297,13 +298,13 @@ export default {
 }
 </script>
 <style scoped>
-img {
+.img-funcionario {
   width: 38px;
   border-radius: 50%;
+  border: 1px solid #ccc;
 }
 .fila-novedad {
-  border-bottom: 1px solid rgba(192, 192, 192, 0.8);
-  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 .incapacidades i {
   font-size: 38px;

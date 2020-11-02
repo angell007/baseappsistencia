@@ -40,15 +40,15 @@ class TableroController extends Controller
         return Funcionario::select('nombres', 'apellidos', DB::raw(
             'DATE_FORMAT(fecha_nacimiento,"%d %M") as fecha'
         ), 'image', DB::raw(
-            'Year(CURDATE()) - Year(fecha_nacimiento) as anios'
+            'Year(CURDATE()) - Year(fecha_nacimiento) as anios' 
         ))->whereRaw('DATE_FORMAT(fecha_nacimiento,"%m-%d") >= DATE_FORMAT(NOW(),"%m-%d")')->orderByRaw('Month(fecha_nacimiento) ASC, DAY(fecha_nacimiento) ASC')->take(5)->get();
     }
 
     public function getVencimientoContratos()
     {
         return Funcionario::select('id', 'nombres', 'apellidos', 'image', DB::raw('DATE_FORMAT(fecha_retiro,"%d %M") as fecha_retiro'), 'tipo_contrato_id', DB::raw('DATEDIFF(fecha_retiro,CURDATE()) as dias_restantes'))->whereNotNull('fecha_retiro')->whereRaw('fecha_retiro >= CURDATE()')->whereHas('contrato', function ($query) {
-            $query->where('id', '=', 1);
-        })->with('contrato')->orderBy('fecha_retiro')->take(5)->get();
+            $query->where('nombre', 'like', '%Fijo%');
+        })->with('contrato')->orderBy('fecha_retiro')->havingRaw('dias_restantes BETWEEN 30 AND 45')->take(5)->get();
     }
 
     public function getIndicadores(){

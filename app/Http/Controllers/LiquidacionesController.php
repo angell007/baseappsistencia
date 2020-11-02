@@ -9,7 +9,7 @@ use App\Models\Empresa;
 
 class LiquidacionesController extends Controller
 {
-
+ 
     /**
      * Retornar objeto JSON con calculo inicial de la liquidación del funcionario siendo posible modificar la fecha de liquidación por parte del usuario, por defecto este parámetro es null
      *

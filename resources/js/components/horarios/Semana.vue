@@ -18,11 +18,10 @@
       <tbody>
         <tr v-for="funcionario in funcionarios" :key="funcionario.id">
           <td class="funcionario-td">
-            <img
-              :src="`/back/storage/app/public/${funcionario.image}`"
-              alt=""
-              class="img-funcionario"
-            >
+
+            <img v-if="funcionario.image!=null" :src="`/back/storage/app/public/${funcionario.image}`" alt="" class="img-funcionario" >
+            <img v-else :src="`/img/robot.jpg`" class="img-funcionario mr-1" alt="" >
+
             <span>{{funcionario.nombres.split(" ")[0] }} {{funcionario.apellidos.split(" ")[0] }}</span>
           </td>
           <td class="text-center custom-label" v-for="dia in diasSemana" :key="dia.dia">
@@ -157,5 +156,6 @@ table thead th:first-child {
   border-radius: 50%;
   margin-right: 5px;
   float: left;
+  border:1px solid #ccc;
 }
 </style>

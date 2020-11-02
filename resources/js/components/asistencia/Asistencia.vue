@@ -35,7 +35,7 @@ export default {
             canvas: {},
             time: moment().format('LTS'),
             vista: true,
-            temp : 36.3
+            temp : 0.0
         }
     },
     mounted() {
@@ -53,9 +53,7 @@ export default {
             var precision = 10; // 2 decimals
             this.time = moment().format('LTS');
         },1000)
-        setInterval(()=>{
-            this.temp =  this.genRand(36.3,36.8,1);
-        },4000)
+        
     },
     methods: {
         capture() {
@@ -64,7 +62,7 @@ export default {
             var img = canvas.toDataURL("image/png");
             this.video.pause();
             this.CambiaVista();
-            axios.post(`/api/${localStorage.getItem('tenant')}/asistencia/validar`, { imagen : img })
+            axios.post(`/api/${localStorage.getItem('tenant')}/asistencia/validar`, { imagen : img, temperatura: this.temp })
                 .then(respuesta => {
                     this.CambiaVista();
                     this.$swal.fire(respuesta.data);

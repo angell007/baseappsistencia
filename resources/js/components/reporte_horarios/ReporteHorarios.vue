@@ -118,7 +118,8 @@
                       class="d-flex flex-column flex-md-row justify-content-center align-items-center"
                     >
                       <div class="w-50 w-xs-100 mb-0">
-                        <img :src="`/back/storage/app/public/${funcionario.image}`" alt="Imagen funcionario">
+                        <img v-if="funcionario.image!=null" :src="`/back/storage/app/public/${funcionario.image}`" class="img-funcionario" alt="">
+                        <img v-else :src="`/img/robot.jpg`" class="img-funcionario" alt="" >
                         <span class="custom-label">{{funcionario.nombres}} {{funcionario.apellidos}}</span>
                       </div>
                       <div class="w-20 w-xs-100">
@@ -322,10 +323,11 @@ export default {
   border-bottom: 1px solid #c0c0c0;
 }
 
-img {
+.img-funcionario {
   width: 38px;
   border-radius: 50%;
   padding: 5px;
+  border:1px solid #ccc;
 }
 .centro-nombre {
   font-weight: bold;

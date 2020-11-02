@@ -27,7 +27,7 @@
         </svg>
       </a>
 
-       <img alt="" src="/img/logo-cliente.png" class="logo-cliente">
+       <img :src="`${Empresa.Imagen}`" class="logo-cliente">
     </div>
 
     <a class="navbar-logo" href="#">
@@ -38,7 +38,7 @@
     <div class="navbar-right">
       <div class="header-icons d-inline-block align-middle">
 
-          <div class="position-relative d-inline-block">
+          <!-- <div class="position-relative d-inline-block">
           <button
             @click="mostarModal('NuevoTicket')"
             class="header-icon btn btn-empty"
@@ -49,7 +49,7 @@
           </button>
 
 
-        </div>
+        </div> -->
 
 
           <div class="position-relative d-inline-block">
@@ -62,13 +62,14 @@
             aria-expanded="false"
           >
             <i class="simple-icon-bell"></i>
-            <span class="count">1</span>
+            <span class="count">0</span>
           </button>
           <div
             class="dropdown-menu dropdown-menu-right mt-3 scroll position-absolute"
             id="notificationDropdown"
           >
             <div class="d-flex flex-row mb-3 pb-3 border-bottom">
+              <!--
               <a href="#">
                 <img src alt class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle">
               </a>
@@ -77,7 +78,8 @@
                   <p class="font-weight-medium mb-1">Augusto Carrillo ha llegado tarde</p>
                   <p class="text-muted mb-0 text-small">01/04/2020 - 09:57am</p>
                 </a>
-              </div>
+              </div> 
+              -->
             </div>
           </div>
         </div>
@@ -102,8 +104,8 @@
           aria-expanded="false"
         >
           <span>
-           
-            <i class="iconsmind-Administrator"></i>
+            {{Funcionario.Nombre}} 
+            <img :src="`${Funcionario.Imagen}`" class="img-funcionario" alt="" >
           </span>
         </button>
 
@@ -165,9 +167,32 @@ export default {
   components: {
     Modal
   },
+  data() {
+    return {
+      Funcionario: {
+        Nombre:'',
+        Imagen:'',
+      },
+      Empresa:{
+        Nombre:'',
+        Imagen:''
+      }
+    }
+  },
+  created() {
+    this.getInformacion()
+  },
   methods: {
+    getInformacion(){
+      var usuario = JSON.parse(localStorage.getItem('usuario'));
+      var empresa = JSON.parse(localStorage.getItem('empresa'));
 
+      this.Funcionario.Nombre= usuario.nombres.split(' ')[0]+" "+usuario.apellidos.split(' ')[0];
+      this.Funcionario.Imagen=  ((usuario.image) ? '/back/storage/app/public/'+usuario.image : '/img/robot.jpg');
 
+      this.Empresa.Nombre= empresa.razon_social;
+      this.Empresa.Imagen=  ((empresa.image) ? '/back/storage/app/public/'+empresa.imagen : 'https://via.placeholder.com/150x50.png?text='+empresa.razon_social.replace(" ","+")); 
+    },
     ocultarSidebar() {
       eventEmitter.$emit('ocultarSidebar', false)
     },

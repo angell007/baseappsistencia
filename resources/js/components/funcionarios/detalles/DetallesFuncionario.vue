@@ -30,12 +30,12 @@
                   <img src="/img/vacations-icon.svg" alt="vacations" class="svg-icon mx-auto">
                   <span class="salary-vacations-item">0</span>
                 </div>
-                <div class="col-md-2 text-center">
+                <!--<div class="col-md-2 text-center">
                   <p class="pb-0 mb-0 text-mute font-weight-bold">Colilla de pago</p>
                   <button class="btn btn-link default link-item">
                     <i class="iconsmind-File-Download d-block data-icon"></i>Descargar
                   </button>
-                </div>
+                </div> -->
                 <div class="col-md-2 text-center">
                   <p class="pb-0 mb-0 text-mute font-weight-bold">Certificado laboral</p>
                   <button class="btn btn-link default link-item">
@@ -406,7 +406,12 @@ export default {
     obtenerFuncionario(identidad) {
       axios.get(`/api/${localStorage.getItem('tenant')}/funcionarios/${identidad}/mostrar`).then(datos => {
         this.funcionario = datos.data
-        this.rutaImagen = `/back/storage/app/public/${this.funcionario.image}`
+
+        if(this.funcionario.image){
+          this.rutaImagen = `back/storage/app/public/${this.funcionario.image}`
+        }else{
+          this.rutaImagen = `/img/robot.jpg`
+        }
         this.mostrarInfo = true
       })
     },

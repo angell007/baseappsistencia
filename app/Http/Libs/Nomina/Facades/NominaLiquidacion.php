@@ -124,7 +124,8 @@ class NominaLiquidacion
         $consultaPeriodo = PagoNomina::vacacionesAcumuladasFuncionarioWithId(self::$funcionario->id)->first();
 
         //Extraer valor ya que se devuelve una instancia de PagoNomina 
-        $vacaionesUltimoPeriodo = $consultaPeriodo['pagosProvisionesNominaFuncionario'][0]['dias_acumulados_vacaciones'];
+        
+        $vacaionesUltimoPeriodo = ($consultaPeriodo ? $consultaPeriodo['pagosProvisionesNominaFuncionario'][0]['dias_acumulados_vacaciones']: 0);
 
         //Settear los días acumulados en el último periodo
         $this->liquidacion->setVacacionesUltimoPeriodo($vacaionesUltimoPeriodo, (!$consultaPeriodo ? false : true));
@@ -133,7 +134,7 @@ class NominaLiquidacion
         $this->ultimoPeriodoPago['fecha_inicio'] =  $consultaPeriodo->inicio_periodo ?? Carbon::now()->startOfMonth()->subMonth()->toDateString();
         $this->ultimoPeriodoPago['fecha_fin'] =  $consultaPeriodo->fin_periodo ?? Carbon::now()->endOfMonth()->subMonth()->toDateString();
     }
-
+ 
     /**
      * Se llama para calcular el pago de la liquidación con los días acumulados que se pasen por parámetro, esto cuando el usuario desee modificar los días acumulados que se calculan autmáticamente.
      *

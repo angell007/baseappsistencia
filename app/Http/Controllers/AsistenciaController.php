@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Http\Controllers\FuncionariosController as Funcionario;
 use App\Http\Controllers\DiariosController as Diarios;
 use App\Http\Controllers\LlegadasTardeController as Llegadas;
+use App\Models\Correo;
+use App\Models\Marcacion;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 require_once $path = base_path('vendor/pear/http_request2/HTTP/Request2.php');
 date_default_timezone_set('America/Bogota');
@@ -27,16 +33,17 @@ class AsistenciaController extends Controller
 
         $imgBase64 = request()->imagen;
         $png_url = time().".png";
-        $path = storage_path().'/app/public/temporales/' . $png_url;
-        //$path = public_path().'/img/temporales/' . $png_url;
+        if(!is_dir(storage_path().'/temporales/')){
+            File::makeDirectory(storage_path().'/temporales/', $mode = 0777, true, true);
+        }
+        $path = storage_path().'/temporales/' . $png_url;
         Image::make(file_get_contents($imgBase64))->save($path);
 
 
         $ocpApimSubscriptionKey = '1f2a8e35f210434bb655212545802b5b';
         $azure_grupo = 'personalclinica2020';
         $uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0';
-        $imageUrl ='https://app.geneticapp.co/back/storage/app/public/temporales/'.$png_url;
-        //$imageUrl ='https://app.geneticapp.co/back/storage/app/public/funcionarios/1591186767.foto5.jpg';
+        $imageUrl = str_replace("/home/geneticapp/","https://",storage_path()).'/temporales/' . $png_url;
 
         $request2 = new \Http_Request2($uriBase . '/detect');
         $url = $request2->getUrl();
@@ -69,6 +76,11 @@ class AsistenciaController extends Controller
             if(is_array($resp)&&count($resp)>0){
                 $face_id=$resp[0]->faceId;
             }else{
+                Marcacion::create([
+                        'tipo'=>'error',
+                        'detalles'=>'Error conectando al Servidor de rostros',
+                        'fecha'=>date("Y-m-d H:i:s")
+                ]);
                 $error = array(
                     'title' => 'Opps!',
                     'text' => 'Error conectando al Servidor de rostros, por favor intente en unos segundos o ubique su rostro frente a la cámara',
@@ -77,6 +89,11 @@ class AsistenciaController extends Controller
                 return $error;
             }
         }catch (HttpException $ex){
+            Marcacion::create([
+                'tipo'=>'error',
+                'detalles'=>'Error de Servidor: '.$ex,
+                'fecha'=>date("Y-m-d H:i:s")
+            ]);
             $error = array(
                 'title' => 'Opps!',
                 'text' => 'Error de Servidor: '.$ex,
@@ -139,15 +156,25 @@ class AsistenciaController extends Controller
                                 }
 
                             }else{
+                                Marcacion::create([
+                                    'tipo'=>'error',
+                                    'detalles'=>'Se identifica un rostro pero al parecer no esta activo en el Sistema',
+                                    'fecha'=>date("Y-m-d H:i:s")
+                                ]);
                                 $error = array(
                                     'title' => 'Error!',
-                                    'html' => 'El rsostro identificado no se encuentra registrado en el Sistema',
+                                    'html' => 'Identificamos un rostro pero al parecer no esta activo en el Sistemaa',
                                     'type' => 'error'
                                 );
                                 return $error;
                             }
                         }
                     }else{
+                        Marcacion::create([
+                            'tipo'=>'error',
+                            'detalles'=>'No se logra identificar el rosto',
+                            'fecha'=>date("Y-m-d H:i:s")
+                        ]);
                         $error = array(
                             'title' => 'Acceso Denegado!',
                             'html' => 'Su rostro no se encuentra en nuestros registros',
@@ -156,6 +183,11 @@ class AsistenciaController extends Controller
                         return $error;
                     }
                 }else{
+                    Marcacion::create([
+                        'tipo'=>'error',
+                        'detalles'=>'No se logra identificar el rosto',
+                        'fecha'=>date("Y-m-d H:i:s")
+                    ]);
                     $error = array(
                         'title' => 'Acceso Denegado!',
                         'html' => 'Su rostro no se encuentra en nuestros registros',
@@ -164,6 +196,11 @@ class AsistenciaController extends Controller
                     return $error;
                 }
             }catch (HttpException $ex){
+                Marcacion::create([
+                    'tipo'=>'error',
+                    'detalles'=>'Error de Servidor: '.$ex,
+                    'fecha'=>date("Y-m-d H:i:s")
+                ]);
                 $error = array(
                     'title' => 'Opps!',
                     'html' => 'Error de Servidor: '.$ex,
@@ -174,7 +211,7 @@ class AsistenciaController extends Controller
         }
     }
     private function ValidaTurnoFijo($func,$hoy,$hactual){
-        $ruta='https://app.geneticapp.co/back/storage/app/public/';
+        $ruta=str_replace("/home/geneticapp/","https://",storage_path());
         /** VALIDACION DE TURNO FIJO ASIGNADO AL FUNCIONARIO */
         //var_dump($func->diariosTurnoFijo);
         if(count($func->diariosTurnoFijo)==0){
@@ -220,6 +257,16 @@ class AsistenciaController extends Controller
                 /** FIN DEL GUARDAR */
 
                 if($diff<=$tol_ent){
+                    $obj = new \stdClass();
+                    $obj->nombre = $func->nombres." ".$func->apellidos;
+                    $obj->imagen = $ruta.$func->image;
+                    $obj->tipo = 'ingreso';
+                    $obj->hora = date("d/m/Y H:i:s",strtotime($hoy." ".$hactual));
+                    $obj->ubicacion = 'entrada';
+                    $obj->destino = $func->email;
+            
+                    Mail::to($func->email)->send(new Correo($obj));
+
                     $respuesta = array(
                         'title' => 'Acceso Autorizado',
                         'html' => "<img src='".$ruta.$func->image."' class='img-thumbnail rounded-circle img-fluid' style='max-width:140px;'  /><br><strong>Bienvenido, Hoy ha llegado temprano</strong><br><strong>".$func->nombres." ".$func->apellidos."</strong><br>".date("d/m/Y H:i:s",strtotime($hoy." ".$hactual)),

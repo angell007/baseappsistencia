@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\FuncCall;
 
 class TenantController extends Controller
 {
@@ -33,8 +34,7 @@ class TenantController extends Controller
         return 'response';
         //     Config::set("database.connections.Tenantcy.database", 'backup');
         //     $admin = new Admin();
-        //     $admin->setConnection('Tenantcy');
-        //     DB::reconnect('Tenantcy');
+        //     $admin->set        //     DB::reconnect('Tenantcy');
         //     $admin1 = $admin->find(1);
         //     // {"tenancy_db_name": "tenantDanilo007"}
         //     return response()->json(['data' =>   $admin1, 'conection' => Config::get("database.connections.mysql"), 'cnt' => DB::connection()->getDatabaseName()]);
@@ -57,10 +57,10 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         DB::beginTransaction();
         try {
- 
+            $data = request()->all();
             /** Creo el Cliente dentro de mi base de datos para controlar todo acerca de él */
             $ruta =  md5(Str::camel(request()->get('empresa'))); // Esta es la ruta cifrada y nombre de la base de datos tambien
             $cliente = Cliente::create([
@@ -82,44 +82,42 @@ class TenantController extends Controller
             /** Creo el usuario que va a realizar login desde mi BD principal*/
             $admin = Admin::create([
                 'usuario' => request()->get('usuario'),
-                'password' => Hash::make(request()->get('password')),
-                'cliente_id' => $cliente["id"]
+                'password' => Hash::make(request()->get('password'))
             ]);
-            /** Creo el TENANT donde se alojará la información del Cliente */    
+            /** Creo el TENANT donde se alojará la información del Cliente */
             $tenant = Tenant::create(['id' => $ruta]);
-            $tenant->domains()->create(['domain' =>$ruta]);
+            $tenant->domains()->create(['domain' => $ruta]);
 
-            /** Me cambio de conexión para agregar los datos también a la base de datos del Cliente */
+            /** Cambio de base de datos para almacenar funcionario y empresa que acabo de crear */
             Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta);
-            $empresa = new Empresa();
-            $empresa->setConnection('Tenantcy');
-            DB::reconnect('Tenantcy');
-
-
-            $empresa->create([
-                  'razon_social' => request()->get('empresa'),
-                  'tipo_documento' => request()->get('tipo_documento'),
-                  'numero_documento' => request()->get('nit'),
-                  'dv' => request()->get('dv'),
-                  'email_contacto' => request()->get('usuario'),
+            /** Guardo datos inciales de empresa */
+            Empresa::create([
+                'razon_social' => $data['empresa'],
+                'tipo_documento' => $data['tipo_documento'],
+                'numero_documento' => $data['nit'],
+                'dv' => $data['dv'],
+                'email_contacto' => $data['usuario']
             ]);
-            
-            /*
-            $func= new Funcionario();
-            $func->setConnection('Tenantcy');
-            
 
-            //return response()->json(request()->all());
+            /** Guardo datos iniciales de funcionarios */
 
-            $funcionario = $func->create(request()->all());
-            */
-            $funcionario='';
+            $funcionario = Funcionario::create([
+                'nombres' => $data['nombres'],
+                'apellidos' => $data['apellidos'],
+                'identidad' => $data['cedula'],
+                'email' => $data['usuario'],
+                'fecha_retiro' => date("2200-m-d H:m:s"),
+            ]); 
+
+            $admin->funcionario_id=$funcionario->id;
+            $admin->cliente_id=$cliente->id;
+            $admin->save();  
 
             DB::commit();
-            return response()->json(['data' =>   $funcionario, 'cnt' => DB::connection()->getDatabaseName()]);
-        } catch (\Exception $e) {
+            return response()->json(['data' => $funcionario , 'cnt' => DB::connection()->getDatabaseName()]);
+        } catch (\Throwable $th) {
             DB::rollback();
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json($th->getMessage());
         }
     }
 

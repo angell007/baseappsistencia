@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Admin;
+use App\Models\Empresa;
 use App\Models\Funcionario;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
@@ -35,16 +36,16 @@ class AuthController extends Controller
             return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        $user = Admin::with("cliente")->find(Auth::user()->id); 
+        $user = Admin::with("cliente")->find(Auth::user()->id);
 
-        $ruta=$user["cliente"]["ruta"];
-        Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta );
-        $funcionario = new Funcionario();        
-        $funcionario->setConnection('Tenantcy');
-        $funcionario->find($user->funcionario_id);
-        DB::reconnect('Tenantcy');
 
-        return response()->json(['status' => 'success', 'token' => $token, 'ruta' => $ruta, 'User' => $funcionario ], 200)->header('Authorization', $token);
+        $ruta = $user["cliente"]["ruta"];
+
+        Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta);
+        $funcionario =  DB::connection('Tenantcy')->table('Funcionario')->where('id', $user['funcionario_id'])->get(["nombres","apellidos","identidad", "image"]);
+        $empresa =  DB::connection('Tenantcy')->table('empresa')->where('id', 1)->get(["razon_social", "imagen"]);
+
+        return response()->json(['status' => 'success', 'token' => $token, 'ruta' => $ruta, 'User' => $funcionario[0], 'Empresa' => $empresa[0]], 200)->header('Authorization', $token);
     }
 
     public function register()
@@ -122,7 +123,7 @@ class AuthController extends Controller
     {
         // BearerToken token....
         dd($request->user());
-       // return response()->json($this->guard()->user(), 200);
+        // return response()->json($this->guard()->user(), 200);
     }
 
     public function refresh()

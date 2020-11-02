@@ -100,6 +100,7 @@ export default {
         .then(datos => {
           localStorage.setItem('token', datos.data.token)
           localStorage.setItem('usuario', JSON.stringify(datos.data.User)); 
+          localStorage.setItem('empresa', JSON.stringify(datos.data.Empresa)); 
           localStorage.setItem('tenant', datos.data.ruta)
           eventEmitter.$emit('autenticado')
           this.$router.push('/tablero')

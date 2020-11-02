@@ -158,9 +158,9 @@ export default {
 .info-calculo-general {
   border: 1px solid #b9b3b3;
 }
-table {
+/*table {
   border: 1px solid #b9b3b3;
-}
+}*/
 .tab-button {
   padding: 6px 10px;
   border-top-left-radius: 3px;

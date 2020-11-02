@@ -16,14 +16,14 @@ class CreateFuncionarioTable extends Migration
         Schema::create('funcionario', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('identidad')->unique()->default(0);
-            $table->string('dv');
+            $table->string('dv')->nullable(); 
             $table->string('nombres');
             $table->string('apellidos');
             $table->boolean('liquidado')->default(0);
-            $table->date('fecha_nacimiento');
+            $table->date('fecha_nacimiento')->nullable();
             $table->text('lugar_nacimiento')->nullable();
-            $table->enum('tipo_sangre', ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']);
-            $table->enum('tipo_turno', ['Fijo', 'Rotativo']);
+            $table->enum('tipo_sangre', ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();
+            $table->enum('tipo_turno', ['Fijo', 'Rotativo'])->nullable();
             $table->integer('turno_fijo_id')->nullable();
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();
@@ -37,25 +37,24 @@ class CreateFuncionarioTable extends Migration
             $table->string('talla_botas')->nullable();
             $table->string('talla_camisa')->nullable();
             $table->string('image')->nullable();
-            $table->integer('salario');
+            $table->integer('salario')->nullable();
             $table->boolean('subsidio_transporte')->default(0);
-            $table->date('fecha_ingreso');
+            $table->date('fecha_ingreso')->nullable();
             $table->integer('numero_hijos')->default(0);
             $table->string('personId')->nullable();
             $table->string('persistedFaceId')->nullable();
             $table->date('fecha_retiro')->nullable();
-            $table->enum('sexo', ['Femenino', 'Masculino']);
-            $table->unsignedInteger('dependencia_id')->index('funcionario_dependencia_id_foreign');
-            $table->unsignedInteger('cargo_id')->index('funcionario_cargo_id_foreign');
+            $table->enum('sexo', ['Femenino', 'Masculino'])->nullable();
+            $table->unsignedInteger('dependencia_id')->index('funcionario_dependencia_id_foreign')->nullable();
+            $table->unsignedInteger('cargo_id')->index('funcionario_cargo_id_foreign')->nullable();
             $table->timestamps();
-            $table->unsignedInteger('eps_id')->index('funcionario_eps_id_foreign');
-            $table->unsignedInteger('cesantias_id')->index('funcionario_cesantias_id_foreign');
-            $table->unsignedInteger('pensiones_id')->index('funcionario_pensiones_id_foreign');
-            $table->unsignedInteger('caja_compensacion_id')->index('funcionario_caja_compensacion_id_foreign');
-            $table->unsignedInteger('tipo_contrato_id')->index('funcionario_tipo_contrato_id_foreign');
-            $table->unsignedInteger('nomina_riesgos_arl_id')->default(1)->index('funcionario_nomina_riesgos_arl_id_foreign');
-            $table->unsignedInteger('jefe_id')->nullable()->index('funcionario_jefe_id_foreign');
-            $table->integer('empresa_id')->nullable();
+            $table->unsignedInteger('eps_id')->index('funcionario_eps_id_foreign')->nullable();
+            $table->unsignedInteger('cesantias_id')->index('funcionario_cesantias_id_foreign')->nullable();
+            $table->unsignedInteger('pensiones_id')->index('funcionario_pensiones_id_foreign')->nullable();
+            $table->unsignedInteger('caja_compensacion_id')->index('funcionario_caja_compensacion_id_foreign')->nullable();
+            $table->unsignedInteger('tipo_contrato_id')->index('funcionario_tipo_contrato_id_foreign')->nullable();
+            $table->unsignedInteger('nomina_riesgos_arl_id')->default(1)->index('funcionario_nomina_riesgos_arl_id_foreign')->nullable();
+            $table->unsignedInteger('jefe_id')->nullable()->index('funcionario_jefe_id_foreign')->nullable();
         });
     }
     /**

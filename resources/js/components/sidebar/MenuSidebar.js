@@ -1,15 +1,15 @@
 export default {
   menuItems: [
-    { item: 'Nómina', icon: 'iconsmind-Money-Bag' },
+    //{ item: 'Nómina', icon: 'iconsmind-Money-Bag' },
     { item: 'Novedades', icon: 'iconsmind-Ticket' },
     { item: 'Horarios', icon: 'iconsmind-Clock' },
     // { item: 'App', icon: 'iconsmind-Smartphone-2' },
     { item: 'Indicadores', icon: 'iconsmind-Line-Chart3' },
     { item: 'Configuración', icon: 'iconsmind-Gears-2' },
-    { item: 'Administrativo', icon: 'iconsmind-Control' },
+    //{ item: 'Administrativo', icon: 'iconsmind-Control' },
   ],
   submenuItems: [
-    {
+    /*{
       item: 'Nómina',
       listItems: [
         {
@@ -33,7 +33,7 @@ export default {
           url: '/nomina/liquidaciones',
         },
       ],
-    },
+    },*/
     {
       item: 'Novedades',
       listItems: [
@@ -69,11 +69,11 @@ export default {
           icon: 'simple-icon-info',
           url: '/reporte/horarios',
         },
-        {
+        /*{
           item: 'Valid. Horas Extras',
           icon: 'simple-icon-check',
           url: '/horas_extras',
-        },
+        },*/
       ],
     },
     // {
@@ -146,7 +146,7 @@ export default {
           icon: 'simple-icon-people',
           url: '/funcionarios',
         },
-        {
+        /*{
           item: 'Eps',
           icon: 'simple-icon-shield',
           url: '/eps',
@@ -170,20 +170,20 @@ export default {
           item: 'Parametrización',
           icon: 'simple-icon-list',
           url: '/parametrizacion',
-        },
+        },*/
         {
             item: 'Encuestas',
             icon: 'iconsmind-Check',
             url: '/encuestas',
           },
-        {
+       /* {
           item: 'Formatos',
           icon: 'simple-icon-docs',
           url: '/formatos',
-        },
+        },*/
       ],
     },
-    {
+    /*{
         item: 'Administrativo',
         listItems: [
           {
@@ -198,6 +198,6 @@ export default {
             url: '/administrativo/soporte',
           },
         ],
-      },
+      },*/
   ],
 }

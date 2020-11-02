@@ -5,10 +5,10 @@
         <thead>
           <tr>
             <th>Fecha</th>
-            <th>Entrada 1</th>
-            <th>Salida 1</th>
-            <th>Entrada 2</th>
-            <th>Salida 2</th>
+            <th style="width:20%">Entrada 1</th>
+            <th style="width:20%">Salida 1</th>
+            <th style="width:20%">Entrada 2</th>
+            <th style="width:20%">Salida 2</th>
           </tr>
         </thead>
         <tbody>
@@ -24,25 +24,28 @@
               </a>
             </td>
             <td>
-              <span class="custom-label">{{horario.hora_salida_uno}} - </span>
-              <a class="btn btn-link p-0">
+              <span class="custom-label" v-if="horario.hora_salida_uno!='00:00:00'" >{{horario.hora_salida_uno}} - </span>
+              <a v-if="horario.hora_salida_uno!='00:00:00'" class="btn btn-link p-0">
                 <i class="iconsmind-Celsius font-weight-bold"></i>
                 {{horario.temp_dos}}
               </a>
+              <span v-if="horario.hora_salida_uno=='00:00:00'">Sin Reportar</span>
             </td>
             <td>
-              <span class="custom-label">{{horario.hora_entrada_dos || 'No presentó entrada'}} - </span>
-              <a class="btn btn-link p-0">
+              <span class="custom-label" v-if="horario.hora_entrada_dos&&horario.hora_entrada_dos!='00:00:00'">{{horario.hora_entrada_dos}} - </span>
+              <a v-if="horario.hora_entrada_dos&&horario.hora_entrada_dos!='00:00:00'" class="btn btn-link p-0">
                 <i class="iconsmind-Celsius font-weight-bold"></i>
                 {{horario.temp_tres}}
               </a>
+              <span v-if="!horario.hora_entrada_dos||horario.hora_entrada_dos=='00:00:00'">Sin Reportar</span>
             </td>
             <td>
-              <span class="custom-label">{{horario.hora_salida_dos || 'No presentó salida'}} - </span>
-              <a class="btn btn-link p-0">
+              <span class="custom-label" v-if="horario.hora_salida_dos&&horario.hora_salida_dos!='00:00:00'">{{horario.hora_salida_dos}} - </span>
+              <a v-if="horario.hora_salida_dos&&horario.hora_salida_dos!='00:00:00'" class="btn btn-link p-0">
                 <i class="iconsmind-Celsius font-weight-bold"></i>
                 {{horario.temp_cuatro}}
               </a>
+              <span v-if="!horario.hora_salida_dos||horario.hora_salida_dos=='00:00:00'">Sin Reportar</span>
             </td>
           </tr>
         </tbody>
