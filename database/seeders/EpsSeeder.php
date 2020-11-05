@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Eps;
 use Illuminate\Database\Seeder;
-use App\Eps;
 
 class EpsSeeder extends Seeder
 {

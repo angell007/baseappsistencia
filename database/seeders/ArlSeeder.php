@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Arl;
 use Illuminate\Database\Seeder;
-use App\Arl;
 
 class ArlSeeder extends Seeder
 {

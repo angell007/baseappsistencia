@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dependencia extends Model
 {
+    protected $connection = 'tenant';
     protected $fillable = ['nombre', 'centro_costo_id'];
     protected $table = 'dependencia';
     protected $hidden = ['created_at', 'updated_at'];

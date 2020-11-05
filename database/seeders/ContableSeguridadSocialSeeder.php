@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\ContableSeguridadSocial;
 use Illuminate\Database\Seeder;
-use App\ContableSeguridadSocial;
 
 class ContableSeguridadSocialSeeder extends Seeder
 {

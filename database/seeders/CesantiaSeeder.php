@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Cesantia;
 use Illuminate\Database\Seeder;
-use App\Cesantia;
+// use App\Cesantia;
 
 class CesantiaSeeder extends Seeder
 {

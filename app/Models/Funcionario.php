@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Funcionario extends Model
 {
-    //protected $connection = 'tenant';
+    protected $connection = 'tenant';
+    
     protected $guarded = ['id'];
     protected $table = 'funcionario';
 
@@ -237,6 +238,11 @@ class Funcionario extends Model
         return $this->belongsTo(TipoContrato::class, 'tipo_contrato_id');
     }
 
+
+    public function submenus()
+    {
+        return $this->hasMany(subMenu::class);
+    }
 
     public function getRouteKeyName()
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArlTable extends Migration
+class CreateAlertaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,8 @@ class CreateArlTable extends Migration
         Schema::create('alerta', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha')->nullable();
-            $table->string('tipo')->nulleable();
             $table->text('detalles')->nullable();
-            $table->numeric('funcionario_id')->nulleable();
+            $table->integer('funcionario_id')->nulleable();
             $table->string('estado')->nulleable();
             $table->string('tipo')->nulleable();
             $table->timestamps();

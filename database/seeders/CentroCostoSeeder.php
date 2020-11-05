@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\CentroCosto;
 use Illuminate\Database\Seeder;
-use App\CentroCosto;
 
 class CentroCostoSeeder extends Seeder
 {

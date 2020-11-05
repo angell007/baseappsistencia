@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cargo extends Model
 {
+    protected $connection = 'tenant';
     protected $fillable = ['nombre', 'dependencia_id'];
     protected $table = 'cargo';
     protected $hidden = ['created_at', 'updated_at'];

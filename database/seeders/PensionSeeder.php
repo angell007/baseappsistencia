@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\Pension;
 use Illuminate\Database\Seeder;
-use App\Pension;
 
 class PensionSeeder extends Seeder
 {

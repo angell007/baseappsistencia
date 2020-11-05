@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\ContableLiquidacion;
 use Illuminate\Database\Seeder;
-use App\ContableLiquidacion;
 
 class ContableLiquidacionSeeder extends Seeder
 {

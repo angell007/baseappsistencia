@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Cliente;
+use App\Models\Empresa;
+use App\Models\Eps;
+use App\Models\Funcionario;
+use App\Observers\ClienteObserver;
+use App\Observers\EmpresaObserver;
+use App\Observers\funcionarioObserver;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Funcionario::observe(funcionarioObserver::class);
+        Cliente::observe(ClienteObserver::class);
+        Empresa::observe(EmpresaObserver::class);
+
         Schema::defaultStringLength(191);
 
         //formato de moneda para el reporte pdf de la colilla y otros reportes de nómina

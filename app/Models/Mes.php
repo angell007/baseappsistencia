@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mes extends Model
 {
+    protected $connection = 'tenant';
+
     protected $guarded = ['id'];
     protected $table = 'mes';
 

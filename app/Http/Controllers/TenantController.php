@@ -11,6 +11,7 @@ use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\DatabaseConnection;
+use App\Services\TenantService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +20,12 @@ use PhpParser\Node\Expr\FuncCall;
 
 class TenantController extends Controller
 {
-    public function __construct()
+
+    private $tenantService;
+
+    public function __construct(TenantService $tenantService)
     {
+        $this->tenantService = $tenantService;
         DB::getDefaultConnection();
     }
 
@@ -60,61 +65,26 @@ class TenantController extends Controller
 
         DB::beginTransaction();
         try {
-            $data = request()->all();
-            /** Creo el Cliente dentro de mi base de datos para controlar todo acerca de él */
-            $ruta =  md5(Str::camel(request()->get('empresa'))); // Esta es la ruta cifrada y nombre de la base de datos tambien
-            $cliente = Cliente::create([
-                'nombre' => request()->get('empresa'),
-                'documento' => request()->get('nit'),
-                'dv' => request()->get('dv'),
-                'correo_registrado' => request()->get('usuario'),
-                'pais_id' => request()->get('pais'),
-                'tipo_negocio' => request()->get('tipo_negocio'),
-                'valor_contrato' => request()->get('valor_contrato'),
-                'fecha_creacion' => date("Y-m-d H:m:s"),
-                'fecha_renovacion' => date("Y-m-d H:m:s"),
-                'fecha_vencimiento' => date("2200-m-d H:m:s"),
-                'tipo_pago' => request()->get('tipo_pago'),
-                'estado' => request()->get('estado'),
-                'ruta' => $ruta,
-            ]);
 
-            /** Creo el usuario que va a realizar login desde mi BD principal*/
-            $admin = Admin::create([
-                'usuario' => request()->get('usuario'),
-                'password' => Hash::make(request()->get('password'))
-            ]);
-            /** Creo el TENANT donde se alojará la información del Cliente */
-            $tenant = Tenant::create(['id' => $ruta]);
-            $tenant->domains()->create(['domain' => $ruta]);
+            $data = request()->all();
+            $ruta =  md5(Str::camel($data['empresa']));
+
+            $cliente = $this->tenantService->createCliente($data, $ruta);
+            $admin = $this->tenantService->createAdmin($data);
+            $this->tenantService->createTenant($ruta);
 
             /** Cambio de base de datos para almacenar funcionario y empresa que acabo de crear */
+            
             Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta);
-            /** Guardo datos inciales de empresa */
-            Empresa::create([
-                'razon_social' => $data['empresa'],
-                'tipo_documento' => $data['tipo_documento'],
-                'numero_documento' => $data['nit'],
-                'dv' => $data['dv'],
-                'email_contacto' => $data['usuario']
-            ]);
+            $this->tenantService->createEmpresa($data);
+            $funcionario = $this->tenantService->createFuncionario($data);
 
-            /** Guardo datos iniciales de funcionarios */
-
-            $funcionario = Funcionario::create([
-                'nombres' => $data['nombres'],
-                'apellidos' => $data['apellidos'],
-                'identidad' => $data['cedula'],
-                'email' => $data['usuario'],
-                'fecha_retiro' => date("2200-m-d H:m:s"),
-            ]); 
-
-            $admin->funcionario_id=$funcionario->id;
-            $admin->cliente_id=$cliente->id;
-            $admin->save();  
+            $admin->funcionario_id = $funcionario->id;
+            $admin->cliente_id = $cliente->id;
+            $admin->save();
 
             DB::commit();
-            return response()->json(['data' => $funcionario , 'cnt' => DB::connection()->getDatabaseName()]);
+            return response()->json(['data' => 'Creados correctamente ', 'cnt' => DB::connection()->getDatabaseName()]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json($th->getMessage());

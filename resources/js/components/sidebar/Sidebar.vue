@@ -1,26 +1,27 @@
 <template>
   <transition name="fade">
     <div class="sidebar" v-if="sidebarVisible">
-      <div class="main-menu" :class="{shadow: !submenu}">
+      <div class="main-menu" :class="{ shadow: !submenu }">
         <vue-custom-scrollbar class="scroll-area" :settings="settings">
           <ul class="list-unstyled">
-            <li :class="{active: active === 'Tablero'}" @click="setDefault">
+            <li :class="{ active: active === 'Tablero' }" @click="setDefault">
               <router-link to="/tablero">
                 <i class="iconsmind-Shop-4"></i> Tablero
               </router-link>
             </li>
             <li
-              v-for="(item,index) in menuItems"
+              v-for="(item, index) in menuItems"
               :key="index"
-              :class="{active: item.item === active}"
+              :class="{ active: item.item === active }"
             >
               <a
+                v-if=" item.item != 'Nómina' || (item.item == 'Nómina' && plan != 'basic')"
                 href="#"
                 @click.prevent="mostrarSubmenu(item.item)"
                 @dblclick.prevent="submenu = false"
               >
                 <i :class="item.icon"></i>
-                {{item.item}}
+                {{ item.item }}
               </a>
             </li>
           </ul>
@@ -34,7 +35,11 @@
       >
         <div class="sub-menu" v-if="submenu">
           <div class>
-            <ul class="list-unstyled" v-for="(subItem, index) in submenuItems" :key="index">
+            <ul
+              class="list-unstyled"
+              v-for="(subItem, index) in submenuItems"
+              :key="index"
+            >
               <template v-if="active === subItem.item">
                 <li
                   v-for="(item, index) in subItem.listItems"
@@ -43,7 +48,7 @@
                 >
                   <router-link :to="item.url">
                     <i :class="item.icon"></i>
-                    {{item.item}}
+                    {{ item.item }}
                   </router-link>
                 </li>
               </template>
@@ -51,16 +56,13 @@
           </div>
         </div>
       </transition>
-
     </div>
-
   </transition>
-
 </template>
 
 <script>
-import menuSidebar from './MenuSidebar'
-import vueCustomScrollbar from 'vue-custom-scrollbar'
+import menuSidebar from "./MenuSidebar";
+import vueCustomScrollbar from "vue-custom-scrollbar";
 
 export default {
   components: { vueCustomScrollbar },
@@ -69,31 +71,46 @@ export default {
       submenu: false,
       menuItems: [],
       submenuItems: [],
-      active: 'Tablero',
+      active: "Tablero",
       sidebarVisible: true,
       settings: {
-        maxScrollbarLength: 60,
+        maxScrollbarLength: 60
       },
-    }
+      plan: ""
+    };
   },
+
+  beforeCreate() {
+    axios
+      .get(
+        `/api/${localStorage.getItem(
+          "tenant"
+        )}/gestion-rutas?token=${localStorage.getItem("token")}`
+      )
+      .then(datos => {
+        this.plan = datos.data.cliente.plan["nombre"];
+        // console.log(datos);
+      });
+  },
+
   created() {
-    this.menuItems = menuSidebar.menuItems
-    this.submenuItems = menuSidebar.submenuItems
-    eventEmitter.$on('ocultarSidebar', () => {
-      this.sidebarVisible = !this.sidebarVisible
-    })
+    this.menuItems = menuSidebar.menuItems;
+    this.submenuItems = menuSidebar.submenuItems;
+    eventEmitter.$on("ocultarSidebar", () => {
+      this.sidebarVisible = !this.sidebarVisible;
+    });
   },
   methods: {
     mostrarSubmenu(target) {
-      this.submenu = true
-      this.active = target
+      this.submenu = true;
+      this.active = target;
     },
     setDefault() {
-      this.submenu = false
-      this.active = 'Tablero'
-    },
-  },
-}
+      this.submenu = false;
+      this.active = "Tablero";
+    }
+  }
+};
 </script>
 
 <style scoped>

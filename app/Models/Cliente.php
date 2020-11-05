@@ -10,4 +10,9 @@ class Cliente extends Model
     protected $table = 'cliente';
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function plan()
+    {
+       return $this->belongsTo(Plan::class);
+    }
+
 }

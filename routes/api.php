@@ -23,6 +23,7 @@ use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\FuncionariosDocumentosController;
 use App\Http\Controllers\FuncionariosExperienciaLaboralController;
 use App\Http\Controllers\FuncionariosReferenciasController;
+use App\Http\Controllers\GestionRutasController;
 use App\Http\Controllers\HistorialPagosController;
 use App\Http\Controllers\HorarioTurnosFijosController;
 use App\Http\Controllers\HorarioTurnosRotativosController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\IngresosPController;
 use App\Http\Controllers\JefesController;
 use App\Http\Controllers\LiquidacionesController;
 use App\Http\Controllers\LlegadasTardeController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NovedadesController;
 use App\Http\Controllers\PagosNominaController;
 use App\Http\Controllers\ParametrizacionController;
@@ -47,36 +49,29 @@ use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 
 
+Route::group([
 
-Route::prefix('auth')->group(function () {
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-    // Loguear al usuario
+], function ($router) {
+
     Route::post('login', [AuthController::class, 'login']);
-
-    // Refrescar el JWT Token
-    Route::get('refresh', [AuthController::class, 'refresh']);
-
-    Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
-
-    // Rutas privadas, requieren autenticáción previa
-    Route::middleware('auth:api')->group(function () {
-        //Obtener información del usuario
-        Route::get('user', [AuthController::class, 'user']);
-        // Logout del usuario de la aplicación
-        Route::post('logout', [AuthController::class, 'logout']);
-    });
+    Route::post('logout',  [AuthController::class, 'logout']);
+    Route::post('refresh',[ AuthController::class, 'refresh']);
+    Route::post('me', [AuthController::class, 'me']);
 });
 
 Route::group([
-    'prefix' => '/{tenant}',
     'middleware' => [InitializeTenancyByPath::class],
+    'prefix' => '/{tenant}',
 ], function () {
 
     /** Rutas de Control de Asistencia */
     Route::post('/asistencia/validar', [AsistenciaController::class, 'validar']);
 
     /** Rutas del Módulo General (empresa) */
-    Route::get('/general/empresa/datos', [EmpresasController::class, 'getDatos']);//->middleware('auth:api');
+    Route::get('/general/empresa/datos', [EmpresasController::class, 'getDatos']); //->middleware('auth:api');
     Route::get('/general/empresa/global', [EmpresasController::class, 'getGlobal']);
     Route::post('/general/empresa/crear', [EmpresasController::class, 'store']);
     Route::get('/general/empresa/mostrar', [EmpresasController::class, 'show']);
@@ -90,7 +85,7 @@ Route::group([
     Route::get('bancos/datos', [BancosController::class, 'index']);
 
     /** Rutas del Módulo de Configuracion de pagos de la empresa */
-    Route::get('general/empresa/configuracion', [EmpresaConfiguracionController::class, 'index']);//->middleware('auth:api');
+    Route::get('general/empresa/configuracion', [EmpresaConfiguracionController::class, 'index']); //->middleware('auth:api');
     Route::get('/general/empresa/configuracion/{id}', [EmpresaConfiguracionController::class, 'show']);
     Route::post('/general/empresa/configuracion/crear', [EmpresaConfiguracionController::class, 'store']);
     Route::put('/general/empresa/configuracion/{id}/editar', [EmpresaConfiguracionController::class, 'update']);
@@ -461,6 +456,13 @@ Route::group([
     Route::get('encuestas/{id}/{fun}/{fecha}/validar', [EncuestaController::class, 'validarEncuesta']);
     Route::get('encuestas/respuestas/{id}/{inicio}/{fin}', [EncuestaController::class, 'getRespuestas']);
     Route::get('encuestas/indicadores/{id}/{inicio}/{fin}', [EncuestaController::class, 'getIndicadores']);
+    
+    
+    //  Controlando accesos
+     
+    Route::get('gestion-rutas', [GestionRutasController::class, 'verPlan']);
+    Route::get('menu', [MenuController::class, 'index']);
+    
 
     /** Error 404 global para el backend */
     Route::fallback(function () {
@@ -469,4 +471,3 @@ Route::group([
         ], 404);
     });
 });
- 

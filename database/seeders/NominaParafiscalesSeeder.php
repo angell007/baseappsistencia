@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\NominaParafiscales;
 use Illuminate\Database\Seeder;
-use App\NominaParafiscales;
 
 class NominaParafiscalesSeeder extends Seeder
 {

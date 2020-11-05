@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\Cliente; 
+use App\Models\Cliente;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Admin extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+    protected $connection = 'mysql';
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +48,6 @@ class Admin extends Authenticatable implements JWTSubject
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class,"cliente_id");
+        return $this->belongsTo(Cliente::class, "cliente_id");
     }
 }

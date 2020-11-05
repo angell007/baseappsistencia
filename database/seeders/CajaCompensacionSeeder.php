@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\CajaCompensacion;
 use Illuminate\Database\Seeder;
-use App\CajaCompensacion;
 
 class CajaCompensacionSeeder extends Seeder
 {

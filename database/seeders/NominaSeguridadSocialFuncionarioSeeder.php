@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\NominaSeguridadSocialFuncionario;
 use Illuminate\Database\Seeder;
-use App\NominaSeguridadSocialFuncionario;
 
 class NominaSeguridadSocialFuncionarioSeeder extends Seeder
 {

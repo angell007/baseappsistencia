@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\NominaHorasExtras;
 use Illuminate\Database\Seeder;
-use App\NominaHorasExtras;
 
 class NominaHorasExtrasSeeder extends Seeder
 {

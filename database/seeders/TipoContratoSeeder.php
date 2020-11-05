@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\TipoContrato;
 use Illuminate\Database\Seeder;
-use App\TipoContrato;
 
 class TipoContratoSeeder extends Seeder
 {

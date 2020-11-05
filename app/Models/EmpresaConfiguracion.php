@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmpresaConfiguracion extends Model
 {
+    protected $connection = 'tenant';
+
     protected $table = 'empresa_configuracion_pago';
     protected $guarded = ['id'];
     protected $casts = [

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TurnoFijo extends Model
 {
+    protected $connection = 'tenant';
+
     protected $guarded = ['id'];
     protected $table = 'turno_fijo';
     protected $hidden = ['created_at', 'updated_at'];

@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\ContableDeduccion;
 use Illuminate\Database\Seeder;
-use App\ContableDeduccion;
+// use App\ContableDeduccion;
 
 class ContableDeduccionSeeder extends Seeder
 {

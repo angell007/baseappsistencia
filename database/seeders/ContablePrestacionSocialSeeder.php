@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\ContablePrestacionSocial;
 use Illuminate\Database\Seeder;
-use App\ContablePrestacionSocial;
 
 class ContablePrestacionSocialSeeder extends Seeder
 {

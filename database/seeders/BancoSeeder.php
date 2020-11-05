@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Banco;
 use Illuminate\Database\Seeder;
-use App\Banco;
+
 
 class BancoSeeder extends Seeder
 {

@@ -270,7 +270,10 @@ export default {
 
   methods: {
     async validarAntesDeEnviar() {
+      
       let validado = await this.$validator.validateAll()
+      console.log(validado);
+
       if (!validado) {
         this.$swal.fire('Oops!', 'Corrige los errores antes de enviar', 'error')
         return false

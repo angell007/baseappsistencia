@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContableLicenciaIncapacidad extends Model
 {
+    protected $connection = 'tenant';
+
     protected $table = 'contable_licencia_incapacidad';
     protected $guarded = ['id'];
 

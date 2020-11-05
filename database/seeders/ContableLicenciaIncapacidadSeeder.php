@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\ContableLicenciaIncapacidad;
 use Illuminate\Database\Seeder;
-use App\ContableLicenciaIncapacidad;
 
 class ContableLicenciaIncapacidadSeeder extends Seeder
 {

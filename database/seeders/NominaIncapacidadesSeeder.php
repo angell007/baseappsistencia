@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\NominaIncapacidades;
 use Illuminate\Database\Seeder;
-use App\NominaIncapacidades;
 
 class NominaIncapacidadesSeeder extends Seeder
 {
@@ -14,12 +17,12 @@ class NominaIncapacidadesSeeder extends Seeder
     {
         NominaIncapacidades::create([
             'prefijo' => 'general',
-            'Concepto' => 'Incapacidad general',
+            'concepto' => 'Incapacidad general',
             'porcentaje' => 0.66667
         ]);
         NominaIncapacidades::create([
             'prefijo' => 'laboral',
-            'Concepto' => 'Incapacidad laboral',
+            'concepto' => 'Incapacidad laboral',
             'porcentaje' => 1.0
         ]);
     }

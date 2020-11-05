@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContableIngreso extends Model
 {
+    protected $connection = 'tenant';
+
     protected $table = 'contable_ingreso';
     protected $guarded = ['id'];
     protected $casts = ['estado' => 'boolean', 'editable' => 'boolean'];

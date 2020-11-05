@@ -17,6 +17,7 @@ class CreateMesTable extends Migration
             $table->integer('id', true);
             $table->date('Mes')->nullable();
             $table->integer('Valor')->nullable();
+            $table->timestamps();
         });
     }
 

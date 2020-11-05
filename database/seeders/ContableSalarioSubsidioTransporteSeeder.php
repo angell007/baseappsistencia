@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\ContableSalarioSubsidioTransporte;
 use Illuminate\Database\Seeder;
-use App\ContableSalarioSubsidioTransporte;
 
 class ContableSalarioSubsidioTransporteSeeder extends Seeder
 {

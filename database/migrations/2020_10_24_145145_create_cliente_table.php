@@ -24,6 +24,10 @@ class CreateClienteTable extends Migration
             $table->date('fecha_registro')->nullable();
             $table->date('fecha_renovacion')->nullable();
             $table->string('tipo_pago', 100)->nullable();
+            $table->string('estado')->nullable();
+            $table->string('ruta')->nullable();
+            $table->unsignedBigInteger('plan_id')->nullable();
+            $table->timestamps();
         });
     }
 

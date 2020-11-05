@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\NominaRiesgosArl;
 use Illuminate\Database\Seeder;
-use App\NominaRiesgosArl;
 
 class NominaRiesgosArlSeeder extends Seeder
 {

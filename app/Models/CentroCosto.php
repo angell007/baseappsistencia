@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CentroCosto extends Model
 {
+    protected $connection = 'tenant';
     protected $fillable = ['nombre', 'codigo', 'prefijo_cuenta_contable'];
     protected $table = 'centro_costo';
     protected $hidden = ['created_at', 'updated_at'];

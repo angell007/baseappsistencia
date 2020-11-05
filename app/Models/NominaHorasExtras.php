@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class NominaHorasExtras extends Model
 {
+    protected $connection = 'tenant';
+
     protected $table = 'nomina_horas_extras';
     protected $guarded = ['id'];
 

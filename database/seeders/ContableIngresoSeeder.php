@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+
+use App\Models\ContableIngreso;
 use Illuminate\Database\Seeder;
-use App\ContableIngreso;
 
 class ContableIngresoSeeder extends Seeder
 {

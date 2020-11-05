@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TurnoRotativo extends Model
 {
+    protected $connection = 'tenant';
+
     protected $guarded = ['id'];
     protected $table = 'turno_rotativo';
     protected $hidden = ['created_at', 'updated_at'];

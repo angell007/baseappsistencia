@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\ContableBancoCaja;
 use Illuminate\Database\Seeder;
-use App\ContableBancoCaja;
+// use App\ContableBancoCaja;
 
 class ContableBancoCajaSeeder extends Seeder
 {
