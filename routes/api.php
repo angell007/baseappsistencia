@@ -463,11 +463,4 @@ Route::group([
     Route::get('gestion-rutas', [GestionRutasController::class, 'verPlan']);
     Route::get('menu', [MenuController::class, 'index']);
     
-
-    /** Error 404 global para el backend */
-    Route::fallback(function () {
-        return response()->json([
-            'message' => 'Página no encontrada. Si el error persiste, contacte a soporte@geneticapp.co'
-        ], 404);
-    });
-});
+}) ;

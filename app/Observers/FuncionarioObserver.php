@@ -2,10 +2,18 @@
 
 namespace App\Observers;
 
+// use App\Models\Admin;
+
+// use App\Admin;
+
+use App\Models\Admin;
+use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\subMenu;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class FuncionarioObserver
 {
@@ -18,14 +26,19 @@ class FuncionarioObserver
     public function created(Funcionario $funcionario)
     {
         $submenus = subMenu::all();
+     
+        if (auth()->user()) {
+            Config::set("database.connections.Tenantcy.database", 'tenant' . (Cliente::find(auth()->user()->cliente_id))->ruta);
+        }
 
         foreach ($submenus  as  $submenu) {
             DB::connection('Tenantcy')->table('funcionario_submenu')->insert([
-                ['funcionario_id' => $funcionario->id,
-                'submenu_id' => $submenu->id],
+                [
+                    'funcionario_id' => $funcionario->id,
+                    'submenu_id' => $submenu->id
+                ],
             ]);
         }
-       
     }
 
     /**

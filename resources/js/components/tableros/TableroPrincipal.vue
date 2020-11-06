@@ -66,7 +66,7 @@
                     v-for="(funcionario,index) in topFuncionariosByRetardos"
                     :key="index"
                   >
-                    <img v-if="funcionario.image!=null" class="img-funcionario" :src="`back/storage/app/public/${funcionario.image}`"  alt="" />
+                    <img v-if="funcionario.image!=null" class="img-funcionario" :src="`${funcionario.image}`"  alt="" />
                     <img v-else :src="`/img/robot.jpg`" class="img-funcionario" alt="" >
                     <p class="mb-0">{{parsearNombreFuncionario(funcionario)}}</p>
                     <p>

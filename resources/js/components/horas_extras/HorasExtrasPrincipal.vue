@@ -86,7 +86,7 @@
                         <div class="row pl-2 pr-3">
                           <div class="col-md-3">
                             <div>
-                              <img :src="`/back/storage/app/public/${funcionario.image}`" alt="foto_funcionario">
+                              <img :src="`${funcionario.image}`" alt="foto_funcionario">
                               <span
                                 class="custom-label"
                               >{{funcionario.nombres}} {{funcionario.apellidos}}</span>

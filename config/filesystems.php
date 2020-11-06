@@ -58,11 +58,23 @@ return [
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
+            'permissions' => [
+
+                        'file' => [
+                            'public' => 0664,
+                            'private' => 0600,
+                        ],
+                        'dir' => [
+                            'public' => 0775,
+                            'private' => 0700,
+                        ],
+                    ],
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+            'visibility' => 'public',
         ],
 
     ],

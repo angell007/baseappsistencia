@@ -68,58 +68,56 @@
 
 <script>
 export default {
-
-    beforeCreate: function() {
-        document.body.className = 'background no-footer ltr rounded';
-    },
+  beforeCreate: function() {
+    document.body.className = "background no-footer ltr rounded";
+  },
   data() {
     return {
       formulario: {
-        usuario: '',
-        password: '',
-      },
-    }
+        usuario: "",
+        password: ""
+      }
+    };
   },
   methods: {
     async validarAntesDeEnviar() {
-      let validado = await this.$validator.validateAll()
+      let validado = await this.$validator.validateAll();
       if (validado) {
-        this.iniciarSesion()
-        return
+        this.iniciarSesion();
+        return;
       }
       this.$notify({
-        group: 'notificaciones',
-        title: 'Error',
-        text: 'Debe corregir los errores antes de iniciar sesión',
-        type: 'error',
-      })
+        group: "notificaciones",
+        title: "Error",
+        text: "Debe corregir los errores antes de iniciar sesión",
+        type: "error"
+      });
     },
     iniciarSesion() {
       axios
-        .post('/api/auth/login', this.$data.formulario)
+        .post("/api/auth/login", this.$data.formulario)
         .then(datos => {
-          localStorage.setItem('token', datos.data.token)
-          localStorage.setItem('usuario', JSON.stringify(datos.data.User)); 
-          localStorage.setItem('empresa', JSON.stringify(datos.data.Empresa)); 
-          localStorage.setItem('tenant', datos.data.ruta)
-          eventEmitter.$emit('autenticado')
-          this.$router.push('/tablero')
+          localStorage.setItem("token", datos.data.token);
+          localStorage.setItem("usuario", JSON.stringify(datos.data.User));
+          localStorage.setItem("empresa", JSON.stringify(datos.data.Empresa));
+          localStorage.setItem("tenant", datos.data.ruta);
+          eventEmitter.$emit("autenticado");
+          this.$router.push("/tablero");
         })
         .catch(error => {
-          console.log(error);
           if (error.response.status == 401) {
             this.$notify({
-              group: 'notificaciones',
-              title: 'Error',
-              text: 'Credenciales inválidas, intente nuevamente',
-              type: 'error',
-            })
+              group: "notificaciones",
+              title: "Error",
+              text: (error.response.data.status) ? (error.response.data.status) : "Credenciales inválidas, intente nuevamente",
+              type: "error"
+            });
           }
-        })
-    },
+        });
+    }
   },
-  created() {},
-}
+  created() {}
+};
 </script>
 
 <style>

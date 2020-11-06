@@ -188,7 +188,7 @@
                       class="col-12 align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center"
                     >
                       <p class="w-40 w-xs-100 mb-0">
-                        <img :src="'/back/storage/app/public/'+funcionario.image" alt="Imagen funcionario">
+                        <img :src="funcionario.image" alt="Imagen funcionario">
                         <span class="custom-label">{{funcionario.nombres}} {{funcionario.apellidos}}</span>
                       </p>
 

@@ -3,7 +3,7 @@
       <div class="form-group col-md-2 text-center">
             <img
             id="imageOutput"
-            :src="`/back/storage/app/public/${this.funcionarioEditar.image}`"
+            :src="`${this.funcionarioEditar.image}`"
             alt="Imagen del funcionario"
             class="d-block m-auto"
             >

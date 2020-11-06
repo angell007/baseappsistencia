@@ -62,7 +62,7 @@
                   class="align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center"
                 >
                   <p class="w-40 w-xs-100 mb-0">
-                    <img v-if="nov.funcionario.image!=null" :src="`/back/storage/app/public/${nov.funcionario.image}`" class="img-funcionario mr-1"  alt="">
+                    <img v-if="nov.funcionario.image!=null" :src="`${nov.funcionario.image}`" class="img-funcionario mr-1"  alt="">
                     <img v-else :src="`/img/robot.jpg`" class="img-funcionario mr-1" alt="" >
                     <span
                       class="font-weight-bold"

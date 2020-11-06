@@ -41,7 +41,9 @@ export default {
   },
   created() {
     if(this.image){
-      this.rutaImagen = `back/storage/app/public/${this.image}`
+            this.rutaImagen = `${this.image}`
+
+      // this.rutaImagen = `back/storage/app/public/${this.image}`
     }else{
       this.rutaImagen = `/img/robot.jpg`
     }

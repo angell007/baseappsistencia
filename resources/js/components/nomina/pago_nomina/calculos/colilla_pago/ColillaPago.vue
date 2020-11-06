@@ -142,7 +142,7 @@ export default {
       )
     },
     getHorasExtrasPorcentajes() {
-      return axios.get('/api/parametrizacion/nomina/extras/porcentajes')
+      return axios.get(`/api/${localStorage.getItem('tenant')}/parametrizacion/nomina/extras/porcentajes`)
     },
     getSalarioDiasTrabajados() {
       return axios.get(

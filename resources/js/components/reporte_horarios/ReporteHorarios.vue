@@ -118,7 +118,7 @@
                       class="d-flex flex-column flex-md-row justify-content-center align-items-center"
                     >
                       <div class="w-50 w-xs-100 mb-0">
-                        <img v-if="funcionario.image!=null" :src="`/back/storage/app/public/${funcionario.image}`" class="img-funcionario" alt="">
+                        <img v-if="funcionario.image!=null" :src="`${funcionario.image}`" class="img-funcionario" alt="">
                         <img v-else :src="`/img/robot.jpg`" class="img-funcionario" alt="" >
                         <span class="custom-label">{{funcionario.nombres}} {{funcionario.apellidos}}</span>
                       </div>

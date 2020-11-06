@@ -21,8 +21,8 @@ class AuthController extends Controller
     public function __construct()
     {
         DB::getDefaultConnection();
-
         $this->middleware('auth:api', ['except' => ['login']]);
+        // $this->middleware('token');
     }
 
     public function login(Request $request)
@@ -39,13 +39,27 @@ class AuthController extends Controller
         }
 
         $user = Admin::with("cliente")->find(auth()->user()->id);
-        $ruta = $user["cliente"]["ruta"];
 
+        if (!$user->acceso_web) {
+
+            auth()->logout();
+            return response()->json([
+                'status' => 'No tienes permisos para acceder',
+            ], 401);
+        }
+
+        $ruta = $user["cliente"]["ruta"];
         Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta);
         $funcionario =  DB::connection('Tenantcy')->table('Funcionario')->where('id', $user['funcionario_id'])->get(["nombres", "apellidos", "identidad", "image"]);
         $empresa =  DB::connection('Tenantcy')->table('empresa')->where('id', 1)->get(["razon_social", "imagen"]);
 
-        return response()->json(['status' => 'success', 'token' => $this->respondWithToken($token), 'ruta' => $ruta, 'User' => $funcionario[0], 'Empresa' => $empresa[0]], 200)->header('Authorization', $token);
+        return response()->json(['status' => 'success', 'token' => $this->respondWithToken($token), 'ruta' => $ruta, 'User' => $funcionario[0], 'Empresa' => $empresa[0]], 200)->header('Authorization', $token)
+            ->withCookie(
+                'token',
+                $token,
+                config('jwt.ttl'),
+                '/'
+            );
     }
 
     public function register()
@@ -130,8 +144,8 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
-        auth()->factory()->getTTL() * 60 ;
-        
+        auth()->factory()->getTTL() * 60;
+
         return $token;
         // return response()->json([
         //     'access_token' => $token,

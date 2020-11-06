@@ -339,8 +339,8 @@
                   <p class="font-weight-bold text-mute">Caja de Compensación</p>
                   <p class="font-weight-bold">{{ funcionario.caja_compensacion.nombre}}</p>
 
-                  <p class="font-weight-bold text-mute">Entidad ARL</p>
-                  <p class="font-weight-bold" v-if="arl">{{ arl}}</p>
+                  <!-- <p class="font-weight-bold text-mute">Entidad ARL</p>
+                  <p class="font-weight-bold" v-if="arl">{{ arl}}</p> -->
                 </div>
               </div>
             </div>
@@ -408,7 +408,7 @@ export default {
         this.funcionario = datos.data
 
         if(this.funcionario.image){
-          this.rutaImagen = `back/storage/app/public/${this.funcionario.image}`
+          this.rutaImagen = `${this.funcionario.image}`
         }else{
           this.rutaImagen = `/img/robot.jpg`
         }
@@ -418,7 +418,9 @@ export default {
 
     obtenerDatosEmpresa() {
       axios.get(`/api/${localStorage.getItem('tenant')}/general/empresa/global`).then(datos => {
-        this.arl = datos.data.arl.nombre
+
+        // console.log(datos);
+        // this.arl = 'datos.data.arl.nombre'
         this.salarioBase = datos.data.salario_base
         this.frecuencia_pago = datos.data.frecuencia_pago
       })
@@ -451,7 +453,7 @@ export default {
     },
 
     CambiaRutaImagen(ruta){
-        this.rutaImagen = `/back/storage/app/public/${ruta}`;
+        this.rutaImagen = `${ruta}`;
     }
   },
   computed: {

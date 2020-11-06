@@ -19,7 +19,7 @@
         <tr v-for="funcionario in funcionarios" :key="funcionario.id">
           <td class="funcionario-td">
 
-            <img v-if="funcionario.image!=null" :src="`/back/storage/app/public/${funcionario.image}`" alt="" class="img-funcionario" >
+            <img v-if="funcionario.image!=null" :src="`${funcionario.image}`" alt="" class="img-funcionario" >
             <img v-else :src="`/img/robot.jpg`" class="img-funcionario mr-1" alt="" >
 
             <span>{{funcionario.nombres.split(" ")[0] }} {{funcionario.apellidos.split(" ")[0] }}</span>

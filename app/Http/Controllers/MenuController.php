@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -20,7 +21,17 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return response()->json(Menu::with('submenus')->get());
+
+        $submenus = DB::table('funcionario_submenu')->where('funcionario_id', auth()->user()->id)->pluck('submenu_id');
+        $menus = Menu::with(['submenus' =>  function ($q) use ($submenus) {
+            $q->whereIn('id', $submenus)->get();
+        }])->get();
+
+
+        return response()->json($menus);
+        // return response()->json(['menus' => $menus, 'user' => auth()->user()->id]);
+
+        // return response()->json(Menu::with('submenus')->get());
     }
 
     /**

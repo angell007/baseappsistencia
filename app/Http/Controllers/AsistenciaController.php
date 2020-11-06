@@ -43,8 +43,8 @@ class AsistenciaController extends Controller
         $ocpApimSubscriptionKey = '1f2a8e35f210434bb655212545802b5b';
         $azure_grupo = 'personalclinica2020';
         $uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0';
-        //$imageUrl = str_replace("/home/geneticapp/","https://",storage_path()).'/temporales/' . $png_url;
-        $imageUrl ='https://app.geneticapp.co/back/storage/tenantfd91ae10e8ce27d51b5401655bd53c53/app/funcionarios/1604284680.luis.jpg';
+        $imageUrl = str_replace("/home/geneticapp/","https://",storage_path()).'/temporales/' . $png_url;
+        //$imageUrl ='https://app.geneticapp.co/back/storage/tenantfd91ae10e8ce27d51b5401655bd53c53/temporales/' . $png_url;
 
         $request2 = new \Http_Request2($uriBase . '/detect');
         $url = $request2->getUrl();

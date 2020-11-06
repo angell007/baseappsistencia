@@ -188,10 +188,10 @@ export default {
       var empresa = JSON.parse(localStorage.getItem('empresa'));
 
       this.Funcionario.Nombre= usuario.nombres.split(' ')[0]+" "+usuario.apellidos.split(' ')[0];
-      this.Funcionario.Imagen=  ((usuario.image) ? '/back/storage/app/public/'+usuario.image : '/img/robot.jpg');
+      this.Funcionario.Imagen=  ((usuario.image) ? +usuario.image : '/img/robot.jpg');
 
       this.Empresa.Nombre= empresa.razon_social;
-      this.Empresa.Imagen=  ((empresa.image) ? '/back/storage/app/public/'+empresa.imagen : 'https://via.placeholder.com/150x50.png?text='+empresa.razon_social.replace(" ","+")); 
+      this.Empresa.Imagen=  ((empresa.image) ? +empresa.imagen : 'https://via.placeholder.com/150x50.png?text='+empresa.razon_social.replace(" ","+")); 
     },
     ocultarSidebar() {
       eventEmitter.$emit('ocultarSidebar', false)

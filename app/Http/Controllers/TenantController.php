@@ -74,7 +74,7 @@ class TenantController extends Controller
             $this->tenantService->createTenant($ruta);
 
             /** Cambio de base de datos para almacenar funcionario y empresa que acabo de crear */
-            
+
             Config::set("database.connections.Tenantcy.database", 'tenant' . $ruta);
             $this->tenantService->createEmpresa($data);
             $funcionario = $this->tenantService->createFuncionario($data);

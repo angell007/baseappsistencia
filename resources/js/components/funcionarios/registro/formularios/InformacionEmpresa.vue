@@ -210,7 +210,6 @@
               placeholder="Seleccione una opción"
               selectLabel="Enter para seleccionar"
               deselectLabel="Enter para remover"
-              v-validate="'required'"
               data-vv-as="Jefe directo"
               v-model="multiSelect.jefe_id"
               :options="jefesDatos"

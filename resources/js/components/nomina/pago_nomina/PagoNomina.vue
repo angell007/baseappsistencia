@@ -161,7 +161,7 @@
                 <tr v-for="(funcionario,index) in funcionarios" :key="index" class="text-center">
                   <td>
                     <img
-                      :src="`/back/storage/app/public/${funcionario.original.image}`"
+                      :src="`${funcionario.original.image}`"
                       class="img-funcionario"
                       alt="Imagen funcionario"
                     >

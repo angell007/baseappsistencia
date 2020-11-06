@@ -12,7 +12,7 @@
         <table class="table tabla-cumple">
             <tr v-for="(funcionario,index) in funcionarios" :key="index">
                 <td>
-                  <img v-if="funcionario.image!=null" :src="`/back/storage/app/public/${funcionario.image}`" class="img-funcionario" alt="" >
+                  <img v-if="funcionario.image!=null" :src="`${funcionario.image}`" class="img-funcionario" alt="" >
                   <img v-else :src="`/img/robot.jpg`" class="img-funcionario" alt="" >
                 </td>
                 <td><p class="font-weight-bold mb-0 text-white">{{funcionario.fecha}}</p></td>

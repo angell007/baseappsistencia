@@ -81,7 +81,7 @@
                   <td class="custom-label d-flex align-items-center justify-content-center">
                     <img
                       class="img-funcionario"
-                      :src="`/back/storage/app/public/${funcionario.image}`"
+                      :src="`${funcionario.image}`"
                       alt="Imagen funcionario"
                     >
                     <span>{{funcionario.nombres}} {{funcionario.apellidos}}</span>
@@ -117,7 +117,7 @@
                   <td class="custom-label d-flex align-items-center justify-content-center">
                     <img
                       class="img-funcionario"
-                      :src="`/back/storage/app/public/${funcionario.image}`"
+                      :src="`${funcionario.image}`"
                       alt="Imagen funcionario"
                     >
                     <span>{{funcionario.nombres}} {{funcionario.apellidos}}</span>

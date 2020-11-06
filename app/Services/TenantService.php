@@ -19,6 +19,7 @@ class TenantService
         $cliente = Cliente::create([
             'nombre' => $data['empresa'],
             'documento' => $data['nit'],
+            'nit' => $data['nit'],
             'dv' => $data['dv'],
             'correo_registrado' => $data['usuario'],
             'pais_id' => $data['pais'],
@@ -38,7 +39,9 @@ class TenantService
         /** Creo el usuario que va a realizar login desde mi BD principal*/
         $admin = Admin::create([
             'usuario' => $data['usuario'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'acceso_app' => 1,
+            'acceso_web' => 1,
         ]);
 
         return $admin;
@@ -70,12 +73,25 @@ class TenantService
             'apellidos' => $data['apellidos'],
             'identidad' => $data['cedula'],
             'email' => $data['usuario'],
-            'fecha_retiro' => date("2200-m-d H:m:s"),
+            'fecha_retiro' => date("2200-m-d H:m:s"),           
+            /********************************************************** */
+            'eps_id' => 1,
+            'cesantias_id' => 1,
+            'pensiones_id' => 1,
+            'caja_compensacion_id' => 1,
+            'tipo_contrato_id' => 1,
+            'nomina_riesgos_arl_id' => 1,
+            'jefe_id' => 1,
+            'dependencia_id' => 1,
+            'cargo_id' => 1,
+            'estado_civil' => 'Soltero(a)',
+            'salario' => 1,
+            'tipo_turno' => 'Fijo',
+            /********************************************************** */
+            'talla_pantalon' => '36',
+            'talla_botas' => '44',
+            'talla_camisa' => '44',
         ]);
-
-        // $funcionario->submenus()->attach();
-
         return $funcionario;
-        
     }
 }

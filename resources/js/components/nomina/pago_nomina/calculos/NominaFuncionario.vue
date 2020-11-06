@@ -9,7 +9,7 @@
           <div class="col-md-4">
             <div>
               <h3>{{funcionario.nombres}} {{funcionario.apellidos}}</h3>
-              <p class="cargo-funcionario font-weight-bold">{{funcionario.cargo.nombre}}</p>
+              <!-- <p class="cargo-funcionario font-weight-bold">{{funcionario.cargo.nombre}}</p> -->
               <p>
                 <strong>C.C</strong>
                 {{funcionario.identidad}}
@@ -130,7 +130,7 @@ export default {
         .then(
           axios.spread((funcionario, datosEmpresa) => {
             this.funcionario = funcionario.data
-            this.rutaImagen = `/back/storage/app/public/${this.funcionario.image}`
+            this.rutaImagen = `${this.funcionario.image}`
             this.datosEmpresa = datosEmpresa.data
             this.mostrarCalculos = true
           })
