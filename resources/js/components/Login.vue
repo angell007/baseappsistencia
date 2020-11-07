@@ -67,6 +67,7 @@
 </template>
 
 <script>
+
 export default {
   beforeCreate: function() {
     document.body.className = "background no-footer ltr rounded";

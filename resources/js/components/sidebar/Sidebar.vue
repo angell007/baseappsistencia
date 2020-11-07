@@ -15,7 +15,10 @@
               :class="{ active: item.item === active }"
             >
               <a
-                v-if=" item.item != 'Nómina' || (item.item == 'Nómina' && plan != 'basic')"
+                v-if="
+                  item.item != 'Nómina' ||
+                    (item.item == 'Nómina' && plan != 'basic')
+                "
                 href="#"
                 @click.prevent="mostrarSubmenu(item.item)"
                 @dblclick.prevent="submenu = false"
@@ -61,7 +64,7 @@
 </template>
 
 <script>
-import menuSidebar from "./MenuSidebar";
+import { menus } from "./MenuSidebar";
 import vueCustomScrollbar from "vue-custom-scrollbar";
 
 export default {
@@ -93,9 +96,21 @@ export default {
       });
   },
 
-  created() {
-    this.menuItems = menuSidebar.menuItems;
-    this.submenuItems = menuSidebar.submenuItems;
+  async created() {
+    const data = await menus();
+
+    data.forEach(element => {
+      if (
+        element.descripcion != "App" &&
+        element.descripcion != "Administrativo"
+      ) {
+        this.menuItems.push({ item: element.descripcion, icon: element.icon });
+        this.submenuItems.push({
+          item: element.descripcion,
+          listItems: element.submenus
+        });
+      }
+    });
     eventEmitter.$on("ocultarSidebar", () => {
       this.sidebarVisible = !this.sidebarVisible;
     });
